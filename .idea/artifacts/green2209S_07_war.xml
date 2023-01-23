@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="green2209S_07:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>green2209S_07</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="green2209S_07-1.0.0-BUILD-SNAPSHOT.war">
+      <element id="artifact" artifact-name="green2209S_07:war exploded" />
+    </root>
+  </artifact>
+</component>
