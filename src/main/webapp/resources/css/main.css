@@ -1,0 +1,29 @@
+* {
+    font-family: 'Apple SD Gothic Neo' , 'Noto Sans KR', sans-serif;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Apple SD Gothic Neo' , 'Noto Sans KR', sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+    line-height: 1.8;
+}
+body {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    color: #5a5a5a;
+}
+.w3-bar .w3-button {
+    padding: 16px;
+}
+.w3-sidebar {
+    z-index: 999;
+}
