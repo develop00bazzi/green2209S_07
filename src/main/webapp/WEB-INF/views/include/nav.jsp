@@ -17,9 +17,15 @@
             <a href="${ctp}/" class="w3-bar-item w3-button w3-wide">아파! 어디가?</a>
             <!-- Right-sided navbar links -->
             <div class="w3-right w3-hide-small">
-                <a href="${ctp}/member/memberLogin" class="w3-bar-item w3-button">로그인</a>
-                <a href="${ctp}/member/memberJoin" class="w3-bar-item w3-button"><i class="fa fa-user"></i> 회원가입</a>
-                <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> 마이페이지</a>
+                <c:if test="${empty sMemClass}">
+                    <a href="${ctp}/member/memberLogin" class="w3-bar-item w3-button">로그인</a>
+                    <a href="${ctp}/member/memberJoin" class="w3-bar-item w3-button"><i class="fa fa-user"></i> 회원가입</a>
+                </c:if>
+                <c:if test="${!empty sMemClass}">
+                    <a class="w3-bar-item w3-button">${sNickName}</a>
+                    <a href="${ctp}/member/memberLogout" class="w3-bar-item w3-button">로그아웃</a>
+                    <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> 마이페이지</a>
+                </c:if>
                 <a href="#pricing" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> 등등등</a>
                 <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> 등등등</a>
             </div>
@@ -33,13 +39,20 @@
 </div>
 
 <!-- Sidebar on small screens when clicking the menu icon -->
-<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large"
+<nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large w3-top"
      style="display:none" id="mySidebar">
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">닫기
         ×</a>
-    <a href="${ctp}/member/memberLogin" onclick="w3_close()" class="w3-bar-item w3-button">로그인</a>
-    <a href="${ctp}/member/memberJoin" onclick="w3_close()" class="w3-bar-item w3-button">회원가입</a>
-    <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">마이페이지</a>
+
+    <c:if test="${empty sMemClass}">
+        <a href="${ctp}/member/memberLogin" onclick="w3_close()" class="w3-bar-item w3-button">로그인</a>
+        <a href="${ctp}/member/memberJoin" onclick="w3_close()" class="w3-bar-item w3-button">회원가입</a>
+    </c:if>
+    <c:if test="${!empty sMemClass}">
+        <a class="w3-bar-item w3-button">${sNickName}</a>
+        <a href="${ctp}/member/memberLogout" class="w3-bar-item w3-button">로그아웃</a>
+        <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">마이페이지</a>
+    </c:if>
     <a href="#pricing" onclick="w3_close()" class="w3-bar-item w3-button">등등등</a>
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">등등등</a>
 </nav>

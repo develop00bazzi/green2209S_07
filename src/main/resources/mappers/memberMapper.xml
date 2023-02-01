@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.green2209S_07.dao.MemberDAO">
+
+    <insert id="setMemberJoinOk">
+        insert into member_s values (default, #{vo.mid}, #{vo.pwd}, #{vo.nickName}, #{vo.name}, #{vo.phoneNum}, #{vo.email}, #{vo.address}, default, default, default, default);
+    </insert>
+    
+    <select id="getMemberInfoMid" resultType="com.spring.green2209S_07.vo.MemberVO">
+        select * from member_s where mid=#{mid};
+    </select>
+
+    <select id="getMemberInfoNickName" resultType="com.spring.green2209S_07.vo.MemberVO">
+        select * from member_s where nickName=#{nickName};
+    </select>
+
+    <select id="getMemberInfoEmail" resultType="com.spring.green2209S_07.vo.MemberVO">
+        select * from member_s where email=#{email};
+    </select>
+    
+    <update id="setEmailAuthKey">
+        update member_s set authKey=#{authKey} where mid=#{vo.mid} and name=#{vo.name} and nickName=#{vo.nickName};
+    </update>
+
+    <update id="setMemberAuthStatusUpdate">
+        update member_s set authStatus=1 where mid=#{vo.mid} and name=#{vo.name} and nickName=#{vo.nickName};
+    </update>
+
+</mapper>
