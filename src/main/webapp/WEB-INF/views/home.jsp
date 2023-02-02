@@ -23,195 +23,565 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
     <link rel="stylesheet" href="${ctp}/resources/css/main.css">
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+        .search-form {
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 1rem;
         }
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
+        .search-form input {
+            height: 100%;
+            background: transparent;
+            border: 0;
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            height: 100%;
+            font-size: 1rem;
+        }
+
+        .search-form select {
+            background: transparent;
+            border: 0;
+            padding: 1rem;
+            height: 100%;
+            font-size: 1rem;
+        }
+
+        .search-form select:focus {
+            border: 0;
+        }
+
+        .search-form button {
+            height: 100%;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .search-form button svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .search-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-body .search-filters .filter-list {
+            margin-bottom: 1.3rem;
+        }
+
+        .search-body .search-filters .filter-list .title {
+            color: #3c4142;
+            margin-bottom: 1rem;
+        }
+
+        .search-body .search-filters .filter-list .filter-text {
+            color: #727686;
+        }
+
+        .search-body .search-result .result-header {
+            margin-bottom: 2rem;
+        }
+
+        .search-body .search-result .result-header .records {
+            color: #3c4142;
+        }
+
+        .search-body .search-result .result-header .result-actions {
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-body .search-result .result-header .result-actions .result-sorting {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-body .search-result .result-header .result-actions .result-sorting span {
+            flex-shrink: 0;
+            font-size: 0.8125rem;
+        }
+
+        .search-body .search-result .result-header .result-actions .result-sorting select {
+            color: #68CBD7;
+        }
+
+        .search-body .search-result .result-header .result-actions .result-sorting select option {
+            color: #3c4142;
+        }
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .search-body .search-filters {
+                display: flex;
+            }
+            .search-body .search-filters .filter-list {
+                margin-right: 1rem;
             }
         }
-
-        /* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
-
-        /* Carousel base class */
-        .carousel {
-            margin-bottom: 4rem;
-        }
-        /* Since positioning the image, we need to help out the caption */
-        .carousel-caption {
-            bottom: 3rem;
-            z-index: 10;
+        .card-box {
+            padding: 20px;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            background-color: #fff;
         }
 
-        /* Declare heights because of positioning of img element */
-        .carousel-item {
-            height: 32rem;
+        .file-man-box {
+            padding: 20px;
+            border: 1px solid #e3eaef;
+            border-radius: 5px;
+            position: relative;
+            margin-bottom: 20px
         }
-        .carousel-item > img {
+
+        .file-man-box .file-close {
+            color: #f1556c;
+            position: absolute;
+            line-height: 24px;
+            font-size: 24px;
+            right: 10px;
+            top: 10px;
+            visibility: hidden
+        }
+
+        .file-man-box .file-img-box {
+            line-height: 120px;
+            text-align: center
+        }
+
+        .file-man-box .file-img-box img {
+            height: 64px
+        }
+
+        .file-man-box .file-download {
+            font-size: 32px;
+            color: #98a6ad;
+            position: absolute;
+            right: 10px
+        }
+
+        .file-man-box .file-download:hover {
+            color: #313a46
+        }
+
+        .file-man-box .file-man-title {
+            /*padding-right: 25px;*/
+        }
+
+        .file-man-box:hover {
+            -webkit-box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06), 0 1px 0 0 rgba(0, 0, 0, .02);
+            box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06), 0 1px 0 0 rgba(0, 0, 0, .02);
+        }
+
+        .file-man-box:hover .file-close {
+            visibility: visible
+        }
+        .text-overflow {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: block;
+            width: 100%;
+            overflow: hidden;
+        }
+        h5 {
+            font-size: 15px;
+        }
+        .feature-box-1 {
+            padding: 32px;
+            box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
+            margin: 15px 0;
+            position: relative;
+            z-index: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            -moz-transition: ease all 0.35s;
+            -o-transition: ease all 0.35s;
+            -webkit-transition: ease all 0.35s;
+            transition: ease all 0.35s;
+            top: 0;
+        }
+        .feature-box-1 * {
+            -moz-transition: ease all 0.35s;
+            -o-transition: ease all 0.35s;
+            -webkit-transition: ease all 0.35s;
+            transition: ease all 0.35s;
+        }
+        .feature-box-1 .icon {
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            background: #fc5356;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 50%;
+            margin-bottom: 22px;
+            font-size: 27px;
+        }
+        .feature-box-1 .icon i {
+            line-height: 70px;
+        }
+        .feature-box-1 h5 {
+            color: #20247b;
+            font-weight: 600;
+        }
+        .feature-box-1 p {
+            margin: 0;
+        }
+        .feature-box-1:after {
+            content: "";
             position: absolute;
             top: 0;
+            bottom: 0;
+            left: auto;
+            right: 0;
+            border-radius: 10px;
+            width: 0;
+            background: #20247b;
+            z-index: -1;
+            -moz-transition: ease all 0.35s;
+            -o-transition: ease all 0.35s;
+            -webkit-transition: ease all 0.35s;
+            transition: ease all 0.35s;
+        }
+        .feature-box-1:hover {
+            top: -5px;
+        }
+        .feature-box-1:hover h5 {
+            color: #ffffff;
+        }
+        .feature-box-1:hover p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .feature-box-1:hover:after {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
             left: 0;
-            min-width: 100%;
-            height: 32rem;
+            right: auto;
         }
-
-
-        /* MARKETING CONTENT
-        -------------------------------------------------- */
-
-        /* Center align the text within the three columns below the carousel */
-        .marketing .col-lg-4 {
-            margin-bottom: 1.5rem;
-            text-align: center;
+        /*.sgguCdNmList {*/
+        /*    transition: ease 0.5s;*/
+        /*    display: none;*/
+        /*}*/
+        /*.feature-box-1:hover .sgguCdNmList {*/
+        /*    display: block;*/
+        /*    transition: ease 0.5s;*/
+        /*}*/
+        .section {
+            /*padding: 100px 0;*/
+            position: relative;
+            z-index: 0;
         }
-        .marketing h2 {
-            font-weight: 400;
+        .section-title {
+            padding-bottom: 45px;
         }
-        .marketing .col-lg-4 p {
-            margin-right: .75rem;
-            margin-left: .75rem;
-        }
-
-
-        /* Featurettes
-        ------------------------- */
-
-        .featurette-divider {
-            margin: 5rem 0; /* Space out the Bootstrap <hr> more */
-        }
-
-        /* Thin out the marketing headings */
-        .featurette-heading {
-            font-weight: 300;
-            line-height: 1;
-            letter-spacing: -.05rem;
-        }
-
-
-        /* RESPONSIVE CSS
-        -------------------------------------------------- */
-
-        @media (min-width: 40em) {
-            /* Bump up size of carousel content */
-            .carousel-caption p {
-                margin-bottom: 1.25rem;
-                font-size: 1.25rem;
-                line-height: 1.4;
-            }
-
-            .featurette-heading {
-                font-size: 50px;
-            }
-        }
-
-        @media (min-width: 62em) {
-            .featurette-heading {
-                margin-top: 7rem;
-            }
+        .section-title h2 {
+            font-weight: 700;
+            color: #20247b;
+            font-size: 45px;
+            margin: 0 0 15px;
+            border-left: 5px solid #fc5356;
+            padding-left: 15px;
         }
     </style>
+    <script>
+        'use strict';
+
+        // $('.feature-box-1').on('click', function () {
+        //     alert("하이");
+        // });
+    </script>
 </head>
 
 <body>
 <jsp:include page="/WEB-INF/views/include/nav.jsp"></jsp:include>
 
-<!-- 내용 -->
+<%-- 심심 풀이로 만들어본 배너 이미지 --%>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false"><title> </title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"> </text></svg>
-<%--            <img src="${ctp}/resources/images/green2209S_07_banner.png" width="100%">--%>
-            <div class="container">
-                <div class="carousel-caption text-left">
-                    <h1>Example headline.</h1>
-                    <p>Some representative placeholder content for the first slide of the carousel.</p>
-<%--                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>--%>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false"><title> </title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"> </text></svg>
 
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
-                    <p>Some representative placeholder content for the second slide of the carousel.</p>
-<%--                    <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>--%>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false"><title> </title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em"> </text></svg>
+<!-- 본문 내용 -->
 
-            <div class="container">
-                <div class="carousel-caption text-right">
-                    <h1>One more for good measure.</h1>
-                    <p>Some representative placeholder content for the third slide of this carousel.</p>
-<%--                    <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>--%>
+<%-- 검색창 --%>
+<div class="container">
+    <div class="container align-center"><img src="${ctp}/resources/images/green2209S_07_banner.png" width="100%"></div>
+    <div class="row">
+        <div class="col-lg-12 card-margin">
+            <div class="card search-form">
+                <div class="card-body p-0">
+                    <form id="search-form">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row no-gutters">
+                                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>지역</option>
+                                            <option>진료 과목</option>
+                                            <option>등등등</option>
+                                            <option>등등등</option>
+                                            <option>등등등</option>
+                                            <option>등등등</option>
+                                            <option>등등등</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+                                        <input type="text" placeholder="검색" class="form-control" id="search" name="search">
+                                    </div>
+                                    <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+                                        <button type="submit" class="btn btn-base">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-target="#myCarousel" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-target="#myCarousel" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </button>
+
+    <%-- 병원 리스트 뽑아줄 창 --%>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box">
+                        <div class="row">
+                            <div class="col-lg-6 col-xl-6">
+                                <h4 class="header-title m-b-30">진료 과목별 검색</h4>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList';">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/hospital.png" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">모든 병원</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/dent.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">치과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/eyes.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">안과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/derm.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">피부과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/plas.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">성형외과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/women.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">산부인과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/mental_new.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">정신의학과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/pee.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">비뇨기과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/sprint.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">정형외과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/stun.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">마치통증의학과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/nsurgery.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">신경외과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/rehab.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">재활의학과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/video.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">영상의학과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/surgery.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">외과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/neuron.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">신경과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/child.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">소아과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/inner.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">내과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/ears.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">이비인후과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/home.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">가정의학과</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-2">
+                                <div class="file-man-box">
+                                    <div class="file-img-box"><img src="${ctp}/resources/images/hospital/han.svg" alt="icon"></div>
+                                    <div class="file-man-title">
+                                        <h5 class="mb-0">한의원</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+<%--                            <div class="col-lg-3 col-xl-2">--%>
+<%--                                <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>--%>
+<%--                                    <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/txt.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>--%>
+<%--                                    <div class="file-man-title">--%>
+<%--                                        <h5 class="mb-0 text-overflow">Mytextfile.txt</h5>--%>
+<%--                                        <p class="mb-0"><small>568.8 kb</small></p>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+                        </div>
+<%--                        <div class="text-center mt-3">--%>
+<%--                            <button type="button" class="btn btn-outline-danger w-md waves-effect waves-light"><i class="mdi mdi-refresh"></i> Load More Files</button>--%>
+<%--                        </div>--%>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- container -->
+    </div>
+
+    <%-- 전국 지역 리스트 보여줄 페이지 --%>
+
+    <section class="section services-section" id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-title">
+                        <h2>지역별 검색</h2>
+                        <p>전국 지역별로 원하는 정보를 검색해보세요.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <c:forEach var="sidoCdNmVO" items="${sidoCdNmVOS}">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="feature-box-1">
+                            <div class="icon">
+                                <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h5>${sidoCdNmVO.sidoCdNm}</h5>
+                                <div class="row sgguCdNmList">
+                                    <c:forEach var="sgguCdNmVO" items="${sgguCdNmVOS}">
+                                        <c:if test="${fn:substring(sidoCdNmVO.sidoCd, 0, 2)==fn:substring(sgguCdNmVO.sgguCd, 0, 2)}">
+                                            <div class="col-sm-6 col-lg-4 pr-0">
+                                                <p>${sgguCdNmVO.sgguCdNm}</p>
+                                            </div>
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+
+                <!-- / -->
+            </div>
+        </div>
+    </section>
+
 </div>
-
-<!-- Marketing messaging and featurettes
-================================================== -->
-<!-- Wrap the rest of the page in another container to center all the content. -->
-
-<div class="container marketing pt-5">
-
-    <!-- Three columns of text below the carousel -->
-    <div class="row">
-        <div class="col-lg-4">
-<%--            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>--%>
-            <img src="${ctp}/resources/images/hospitalImg.png" class="bd-placeholder-img rounded-circle"width="140" height="140"/>
-            <h2>병원 찾기</h2>
-<%--            <p>전국에 있는 병원에 대한 정보 조회</p>--%>
-<%--            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>--%>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-<%--            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>--%>
-            <img src="${ctp}/resources/images/pharmacyImg.png" class="bd-placeholder-img rounded-circle"width="140" height="140"/>
-            <h2>약국 찾기</h2>
-<%--            <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>--%>
-<%--            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>--%>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-<%--            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>--%>
-            <img src="${ctp}/resources/images/covidImg.png" class="bd-placeholder-img rounded-circle"width="140" height="140"/>
-            <h2>호흡기 환자 진료 병원 찾기</h2>
-<%--            <p>And lastly this, the third column of representative placeholder content.And lastly this, the third column of representative placeholder content.</p>--%>
-<%--            <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>--%>
-        </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-    <hr class="featurette-divider">
-
-    <!-- /END THE FEATURETTES -->
-
-</div><!-- /.container -->
-
+<p><br/></p>
 <!-- Footer -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </body>

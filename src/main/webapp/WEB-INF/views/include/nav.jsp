@@ -11,7 +11,7 @@
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 
 <!-- Navbar (sit on top) -->
-<div class="w3-top">
+<div class="w3-top mainNav">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
         <div class="container">
             <a href="${ctp}/" class="w3-bar-item w3-button w3-wide">아파! 어디가?</a>

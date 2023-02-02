@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.green2209S_07.dao.MainDAO">
+
+    <select id="getSidoList" resultType="com.spring.green2209S_07.vo.HospitalInfoVO">
+        select sidoCd, sidoCdNm from hospitalinfo_s group by sidoCd, sidoCdNm;
+    </select>
+
+    <select id="getSgguList" resultType="com.spring.green2209S_07.vo.HospitalInfoVO">
+        select sgguCd, sgguCdNm from hospitalinfo_s group by sgguCd, sgguCdNm order by sgguCdNm;
+    </select>
+
+</mapper>

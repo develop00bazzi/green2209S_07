@@ -25,9 +25,13 @@ body {
 
 
 .w3-bar .w3-button {
-    z-index: 998;
+    z-index: 888;
     padding: 16px;
 }
 .w3-sidebar {
+    z-index: 888;
+}
+
+.mainNav {
     z-index: 999;
 }

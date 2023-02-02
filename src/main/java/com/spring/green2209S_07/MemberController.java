@@ -44,10 +44,10 @@ public class MemberController {
 
     @RequestMapping(value = "/memberLogin", method = RequestMethod.POST)
     public String memberLoginPost(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-                                  @RequestParam(name = "mid", defaultValue = "", required = false) String mid,
-                                  @RequestParam(name = "pwd", defaultValue = "", required = false) String pwd,
-                                  @RequestParam(name = "idSave", defaultValue = "", required = false) String idSave
-                                  ) {
+        @RequestParam(name = "mid", defaultValue = "", required = false) String mid,
+        @RequestParam(name = "pwd", defaultValue = "", required = false) String pwd,
+        @RequestParam(name = "idSave", defaultValue = "", required = false) String idSave
+        ) {
         MemberVO vo=memberService.getMemberInfoMid(mid);
 
         // VO에 해당 값이 존재하고, 비밀번호가 일치, 탈퇴 신청한 회원이 아닌 경우 로그인 처리
@@ -136,6 +136,8 @@ public class MemberController {
         // 이메일 인증을 위한 이메일 발송 처리
         // 사진 파일 경로
         String bannerImg=request.getSession().getServletContext().getRealPath("/resources/images/green2209S_07_banner.png");
+
+        // 서비스 단에서 request 사용하려면 복잡하니까 컨트롤러 부분에서 미리 경로 생성 후 넘겨주면 작업이 훨씬 용이하다.
 
         memberService.memberJoinOkEmailSend(vo, bannerImg);
 

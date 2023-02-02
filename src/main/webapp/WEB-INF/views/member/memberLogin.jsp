@@ -106,17 +106,17 @@
                 <h2 class="color--white mb-5">아파! 어디가? 로그인</h2>
 
                 <ul class="contact-info__list list-style--none position-relative z-index-101">
-                    <li class="mb-4 pl-4">
-                        <h4>소셜 로그인</h4>
+<%--                    <li class="mb-4 pl-4">--%>
+<%--                        <h4>소셜 로그인</h4>--%>
+<%--                    </li>--%>
+                    <li class="mb-4">
+                        <a href="#"><img src="${ctp}/resources/images/kakao_login_large_narrow.png" width="100%" style="z-index: 990;"></a>
                     </li>
-                    <li class="mb-4 pl-4">
-                        카카오
+                    <li class="mb-4">
+                        <a href="#"><img src="${ctp}/resources/images/btnG_완성형.png" width="100%" style="z-index: 990;"></a>
                     </li>
-                    <li class="mb-4 pl-4">
-                        구글
-                    </li>
-                    <li class="mb-4 pl-4">
-                        네이버
+                    <li class="mb-4">
+                        <a href="#"><img src="${ctp}/resources/images/btn_google_signin_light_normal_web@2x.png" width="100%" style="z-index: 990;"></a>
                     </li>
                 </ul>
 
@@ -142,14 +142,14 @@
                         <div class="col-sm-12 mb-3">
                             <div class="form-group">
                                 <label class="required-field" for="mid">아이디</label>
-                                <input type="text" class="form-control" id="mid" name="mid" value="${mid}" placeholder="아이디를 입력해주세요!">
+                                <input type="text" class="form-control form-control-lg" id="mid" name="mid" value="${mid}" placeholder="아이디를 입력해주세요!">
                             </div>
                         </div>
 
                         <div class="col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="pwd">비밀번호</label>
-                                <input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호를 입력해주세요!">
+                                <input type="password" class="form-control form-control-lg" id="pwd" name="pwd" placeholder="비밀번호를 입력해주세요!">
                             </div>
                         </div>
 
