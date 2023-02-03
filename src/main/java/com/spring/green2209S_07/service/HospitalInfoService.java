@@ -13,4 +13,8 @@ public interface HospitalInfoService {
     public ArrayList<MedicalSubjectInfoVO> getMedicalSubjectList(String ykiho);
 
     public ArrayList<DetailInfoVO> getDetailInfoList(String ykiho);
+
+    public ArrayList<HospitalInfoVO> getSidoList();
+
+    public ArrayList<HospitalInfoVO> getSgguList(String sidoCd);
 }

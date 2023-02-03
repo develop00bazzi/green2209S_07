@@ -16,4 +16,8 @@ public interface HospitalInfoDAO {
     public ArrayList<MedicalSubjectInfoVO> getMedicalSubjectList(@Param("ykiho") String ykiho);
 
     public ArrayList<DetailInfoVO> getDetailInfoList(@Param("ykiho") String ykiho);
+
+    public ArrayList<HospitalInfoVO> getSidoList();
+
+    public ArrayList<HospitalInfoVO> getSgguList(@Param("sidoCd") String sidoCd);
 }

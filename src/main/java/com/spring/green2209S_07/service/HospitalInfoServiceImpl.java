@@ -29,5 +29,15 @@ public class HospitalInfoServiceImpl implements HospitalInfoService {
         return hospitalInfoDAO.getDetailInfoList(ykiho);
     }
 
+    @Override
+    public ArrayList<HospitalInfoVO> getSidoList() {
+        return hospitalInfoDAO.getSidoList();
+    }
+
+    @Override
+    public ArrayList<HospitalInfoVO> getSgguList(String sidoCd) {
+        return hospitalInfoDAO.getSgguList(sidoCd);
+    }
+
 
 }

@@ -14,4 +14,11 @@
         select * from detailsInfo_s where ykiho=#{ykiho};
     </select>
 
+    <select id="getSidoList" resultType="com.spring.green2209S_07.vo.HospitalInfoVO">
+        select sidoCd, sidoCdNm from hospitalinfo_s group by sidoCd, sidoCdNm;
+    </select>
+    
+    <select id="getSgguList" resultType="com.spring.green2209S_07.vo.HospitalInfoVO">
+        select sgguCd,sgguCdNm from hospitalInfo_s where substring(sgguCd,1,2)=substring(#{sidoCd},1,2) group by sgguCd,sgguCdNm;
+    </select>
 </mapper>
