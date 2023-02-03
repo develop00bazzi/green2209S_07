@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.green2209S_07.dao.HospitalInfoDAO">
+
+    <select id="getHospitalInfoList" resultType="com.spring.green2209S_07.vo.HospitalInfoVO">
+        select * from hospitalInfo_s where sgguCdNm='청주서원구' limit 0,10;
+    </select>
+
+    <select id="getMedicalSubjectList" resultType="com.spring.green2209S_07.vo.MedicalSubjectInfoVO">
+        select * from medicalSubjectInfo_s where ykiho=#{ykiho};
+    </select>
+
+    <select id="getDetailInfoList" resultType="com.spring.green2209S_07.vo.DetailInfoVO">
+        select * from detailsInfo_s where ykiho=#{ykiho};
+    </select>
+
+</mapper>
