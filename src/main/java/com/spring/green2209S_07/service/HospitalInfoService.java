@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 public interface HospitalInfoService {
 
-    public ArrayList<HospitalInfoVO> getHospitalInfoList();
-
     public ArrayList<MedicalSubjectInfoVO> getMedicalSubjectList(String ykiho);
 
     public ArrayList<DetailInfoVO> getDetailInfoList(String ykiho);
@@ -17,4 +15,8 @@ public interface HospitalInfoService {
     public ArrayList<HospitalInfoVO> getSidoList();
 
     public ArrayList<HospitalInfoVO> getSgguList(String sidoCd);
+
+    public int getTotRecCnt(String medicalSubjectCode, String regionCode, String regionFlag, String yadmNm);
+
+    ArrayList<HospitalInfoVO> getHospitalInfoList(int startIndexNo, int pageSize, String medicalSubjectCode, String regionCode, String regionFlag, String yadmNm);
 }

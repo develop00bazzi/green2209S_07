@@ -364,7 +364,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=49&medicalSubject=치과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/dent.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -372,7 +372,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=12&medicalSubject=안과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/eyes.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -380,7 +380,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=14&medicalSubject=피부과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/derm.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -388,7 +388,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=8&medicalSubject=성형외과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/plas.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -396,7 +396,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=10&medicalSubject=산부인과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/women.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -404,7 +404,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=3&medicalSubject=정신의학과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/mental_new.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -412,7 +412,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=15&medicalSubject=비뇨기과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/pee.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -420,7 +420,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=5&medicalSubject=정형외과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/sprint.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -428,15 +428,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=9&medicalSubject=마치통증의학과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/stun.svg" alt="icon"></div>
                                     <div class="file-man-title">
-                                        <h5 class="mb-0">마치통증의학과</h5>
+                                        <h5 class="mb-0">마취통증의학과</h5>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=6&medicalSubject=신경외과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/nsurgery.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -444,7 +444,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=21&medicalSubject=재활의학과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/rehab.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -452,7 +452,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=16&medicalSubject=영상의학과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/video.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -460,7 +460,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=4&medicalSubject=외과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/surgery.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -468,7 +468,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=2&medicalSubject=신경과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/neuron.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -476,7 +476,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=11&medicalSubject=소아과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/child.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -484,7 +484,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=1&medicalSubject=내과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/inner.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -492,7 +492,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=13&medicalSubject=이비인후과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/ears.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -500,7 +500,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=23&medicalSubject=가정의학과';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/home.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -508,7 +508,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-xl-2">
+                            <div class="col-lg-3 col-xl-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?medicalSubjectCode=99&medicalSubject=한의원';">
                                 <div class="file-man-box">
                                     <div class="file-img-box"><img src="${ctp}/resources/images/hospital/han.svg" alt="icon"></div>
                                     <div class="file-man-title">
@@ -554,7 +554,7 @@
             <div class="row">
 
                 <c:forEach var="sidoCdNmVO" items="${sidoCdNmVOS}">
-                    <div class="col-sm-6 col-lg-4">
+                    <div class="col-sm-6 col-lg-4" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfoList?regionCode=${sidoCdNmVO.sidoCd}';">
                         <div class="feature-box-1">
                             <div class="icon">
                                 <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
@@ -565,7 +565,7 @@
                                     <c:forEach var="sgguCdNmVO" items="${sgguCdNmVOS}">
                                         <c:if test="${fn:substring(sidoCdNmVO.sidoCd, 0, 2)==fn:substring(sgguCdNmVO.sgguCd, 0, 2)}">
                                             <div class="col-sm-6 col-lg-4 pr-0">
-                                                <p>${sgguCdNmVO.sgguCdNm}</p>
+                                                <p><a href="${ctp}/hospitalInfo/hospitalInfoList?regionCode=${sgguCdNmVO.sgguCd}">${sgguCdNmVO.sgguCdNm}</a></p>
                                             </div>
                                         </c:if>
                                     </c:forEach>

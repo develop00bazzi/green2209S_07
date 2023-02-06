@@ -15,11 +15,6 @@ public class HospitalInfoServiceImpl implements HospitalInfoService {
     HospitalInfoDAO hospitalInfoDAO;
 
     @Override
-    public ArrayList<HospitalInfoVO> getHospitalInfoList() {
-        return hospitalInfoDAO.getHospitalInfoList();
-    }
-
-    @Override
     public ArrayList<MedicalSubjectInfoVO> getMedicalSubjectList(String ykiho) {
         return hospitalInfoDAO.getMedicalSubjectList(ykiho);
     }
@@ -37,6 +32,28 @@ public class HospitalInfoServiceImpl implements HospitalInfoService {
     @Override
     public ArrayList<HospitalInfoVO> getSgguList(String sidoCd) {
         return hospitalInfoDAO.getSgguList(sidoCd);
+    }
+
+    @Override
+    public int getTotRecCnt(String medicalSubjectCode, String regionCode, String regionFlag, String yadmNm) {
+
+        System.out.println("getTotRecCnt 서비스: "+medicalSubjectCode);
+        System.out.println("getTotRecCnt 서비스: "+regionCode);
+        System.out.println("getTotRecCnt 서비스: "+regionFlag);
+        System.out.println("getTotRecCnt 서비스: "+yadmNm);
+
+        return hospitalInfoDAO.getTotRecCnt(medicalSubjectCode, regionCode, regionFlag, yadmNm);
+    }
+
+    @Override
+    public ArrayList<HospitalInfoVO> getHospitalInfoList(int startIndexNo, int pageSize, String medicalSubjectCode, String regionCode, String regionFlag, String yadmNm) {
+
+        System.out.println("getHospitalInfoList 서비스: "+medicalSubjectCode);
+        System.out.println("getHospitalInfoList 서비스: "+regionCode);
+        System.out.println("getHospitalInfoList 서비스: "+regionFlag);
+        System.out.println("getHospitalInfoList 서비스: "+yadmNm);
+
+        return hospitalInfoDAO.getHospitalInfoList(startIndexNo, pageSize, medicalSubjectCode, regionCode, regionFlag, yadmNm);
     }
 
 

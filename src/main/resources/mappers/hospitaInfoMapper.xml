@@ -2,9 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.green2209S_07.dao.HospitalInfoDAO">
 
-    <select id="getHospitalInfoList" resultType="com.spring.green2209S_07.vo.HospitalInfoVO">
-        select * from hospitalInfo_s where sgguCdNm='청주서원구' limit 0,10;
+    <select id="getTotRecCnt" resultType="int">
+        select count(*) from hospitalinfo_s where ykiho in (select ykiho from medicalsubjectinfo_s where dgsbjtCd=#{medicalSubjectCode}) and ykiho in (select ykiho from hospitalinfo_s where
+        <if test="regionFlag=='sido'">sidoCd</if><if test="regionFlag=='sggu'">sgguCd</if>=#{regionCode})
+        <if test="yadmNm!=''">and ykiho in (select ykiho from hospitalInfo_s where yadmNm like concat('%', #{yadmNm}, '%'))</if>;
     </select>
+
+    <select id="getHospitalInfoList" resultType="com.spring.green2209S_07.vo.HospitalInfoVO">
+        select * from hospitalinfo_s where ykiho in (select ykiho from medicalsubjectinfo_s where dgsbjtCd=#{medicalSubjectCode}) and ykiho in (select ykiho from hospitalinfo_s where
+        <if test="regionFlag=='sido'">sidoCd</if><if test="regionFlag=='sggu'">sgguCd</if>=#{regionCode})
+        <if test="yadmNm!=''">and ykiho in (select ykiho from hospitalInfo_s where yadmNm like concat('%', #{yadmNm}, '%'))</if> order by yadmNm desc limit #{startIndexNo}, #{pageSize};
+    </select>
+
+<!--    <select id="getHospitalInfoList" resultType="com.spring.green2209S_07.vo.HospitalInfoVO">-->
+<!--        select * from hospitalInfo_s where sgguCdNm='청주서원구' limit 0,10;-->
+<!--    </select>-->
 
     <select id="getMedicalSubjectList" resultType="com.spring.green2209S_07.vo.MedicalSubjectInfoVO">
         select * from medicalSubjectInfo_s where ykiho=#{ykiho};
