@@ -3,6 +3,7 @@ package com.spring.green2209S_07.dao;
 import com.spring.green2209S_07.vo.DetailInfoVO;
 import com.spring.green2209S_07.vo.HospitalInfoVO;
 import com.spring.green2209S_07.vo.MedicalSubjectInfoVO;
+import com.spring.green2209S_07.vo.TrafficInfoVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -26,4 +27,6 @@ public interface HospitalInfoDAO {
     public HospitalInfoVO getHositalInfo(@Param("ykiho") String ykiho);
 
     public DetailInfoVO getDetailInfo(@Param("ykiho") String ykiho);
+
+    ArrayList<TrafficInfoVO> getTrafficInfo(@Param("ykiho") String ykiho);
 }

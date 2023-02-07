@@ -1,3 +1,5 @@
+/*
+
 package com.spring.green2209S_07;
 
 import com.spring.green2209S_07.pagenation.PageProcess;
@@ -6,7 +8,6 @@ import com.spring.green2209S_07.service.HospitalInfoService;
 import com.spring.green2209S_07.vo.DetailInfoVO;
 import com.spring.green2209S_07.vo.HospitalInfoVO;
 import com.spring.green2209S_07.vo.MedicalSubjectInfoVO;
-import com.spring.green2209S_07.vo.TrafficInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @Controller
 @RequestMapping("/hospitalInfo")
-public class HospitalInfoController {
+public class HospitalInfoController2 {
 
     @Autowired
     HospitalInfoService hospitalInfoService;
@@ -88,42 +88,33 @@ public class HospitalInfoController {
 
         // 병원 진료 과목 정보 리스트
 
-//        ArrayList<ArrayList<MedicalSubjectInfoVO>> medicalSubjectInfoListVOS=new ArrayList<>();
-//
-//        for(int i=0; i<hospitalInfoVOS.size(); i++) {
-//            medicalSubjectInfoListVOS.add(hospitalInfoService.getMedicalSubjectInfoList(hospitalInfoVOS.get(i).getYkiho()));
-//        }
-//
-//        model.addAttribute("medicalSubjectInfoListVOS", medicalSubjectInfoListVOS);
-
-        ArrayList<MedicalSubjectInfoVO> medicalSubjectInfoVOS=new ArrayList<>();
-        HashMap<String, ArrayList<MedicalSubjectInfoVO>> medicalSubjectInfoVOHashMap=new HashMap<>();
+        ArrayList<ArrayList<MedicalSubjectInfoVO>> medicalSubjectInfoListVOS=new ArrayList<>();
 
         for(int i=0; i<hospitalInfoVOS.size(); i++) {
-            medicalSubjectInfoVOHashMap.put(hospitalInfoVOS.get(i).getYkiho(), hospitalInfoService.getMedicalSubjectInfoList(hospitalInfoVOS.get(i).getYkiho()));
+            medicalSubjectInfoListVOS.add(hospitalInfoService.getMedicalSubjectInfoList(hospitalInfoVOS.get(i).getYkiho()));
         }
+        
+        model.addAttribute("medicalSubjectInfoListVOS", medicalSubjectInfoListVOS);
 
+//        ArrayList<MedicalSubjectInfoVO> medicalSubjectInfoVOS=new ArrayList<>();
+//        HashMap<String, ArrayList<MedicalSubjectInfoVO>> medicalSubjectInfoVOHashMap=new HashMap<>();
+//
+//        for(int i=0; i<hospitalInfoVOS.size(); i++) {
+//            medicalSubjectInfoVOHashMap.put(hospitalInfoVOS.get(i).getYkiho(), hospitalInfoService.getMedicalSubjectInfoList(hospitalInfoVOS.get(i).getYkiho()));
+//        }
+//
 //        System.out.println("medicalSubjectInfoVOHashMap: "+medicalSubjectInfoVOHashMap);
-        model.addAttribute("medicalSubjectInfoVOHashMap", medicalSubjectInfoVOHashMap);
+
 
         // 병원 진료시간 정보 리스트
 
-//        ArrayList<ArrayList<DetailInfoVO>> detailInfoListVOS=new ArrayList<>();
-//
-//        for(int i=0; i<hospitalInfoVOS.size(); i++) {
-//            detailInfoListVOS.add(hospitalInfoService.getDetailInfoList(hospitalInfoVOS.get(i).getYkiho()));
-//        }
-//
-//        model.addAttribute("detailInfoListVOS", detailInfoListVOS);
-
-        HashMap<String, DetailInfoVO> detailInfoVOHashMap=new HashMap<>();
+        ArrayList<ArrayList<DetailInfoVO>> detailInfoListVOS=new ArrayList<>();
 
         for(int i=0; i<hospitalInfoVOS.size(); i++) {
-            detailInfoVOHashMap.put(hospitalInfoVOS.get(i).getYkiho(), hospitalInfoService.getDetailInfo(hospitalInfoVOS.get(i).getYkiho()));
+            detailInfoListVOS.add(hospitalInfoService.getDetailInfoList(hospitalInfoVOS.get(i).getYkiho()));
         }
 
-//        System.out.println("detailInfoVOHashMap: "+detailInfoVOHashMap);
-        model.addAttribute("detailInfoVOHashMap", detailInfoVOHashMap);
+        model.addAttribute("detailInfoListVOS", detailInfoListVOS);
 
         // 시도 리스트 가져오기
 
@@ -231,16 +222,12 @@ public class HospitalInfoController {
         DetailInfoVO detailInfoVO=hospitalInfoService.getDetailInfo(ykiho);
         model.addAttribute("detailInfoVO", detailInfoVO);
 
-        // 병원 교통 정보 가져오기
-
-        ArrayList<TrafficInfoVO> trafficInfoVOS=hospitalInfoService.getTrafficInfo(ykiho);
-        model.addAttribute("trafficInfoVOS", trafficInfoVOS);
-
-        System.out.println("trafficInfoVOS: "+trafficInfoVOS);
-
         return "hospitalInfo/hospitalInfo";
     }
 
 
 
 }
+
+
+*/

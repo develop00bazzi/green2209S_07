@@ -45,5 +45,9 @@
     <select id="getDetailInfo" resultType="com.spring.green2209S_07.vo.DetailInfoVO">
         select * from detailsInfo_s where ykiho=#{ykiho};
     </select>
+    
+    <select id="getTrafficInfo" resultType="com.spring.green2209S_07.vo.TrafficInfoVO">
+        select * from trafficInfo_s where ykiho=#{ykiho};
+    </select>
 
 </mapper>

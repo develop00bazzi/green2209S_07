@@ -499,8 +499,11 @@
         .text-95 {
             font-size: .95em!important;
         }
-
     </style>
+    <script>
+        'use strict';
+    </script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d9f2a0e2e19ba0f1e69f3d21528563d0"></script>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/include/nav.jsp"></jsp:include>
@@ -511,16 +514,12 @@
             <div class="col-lg-8 m-15px-tb">
                 <article class="article">
                     <div class="article-img">
-<%--                        <img src="https://www.bootdey.com/image/800x350/87CEFA/000000" title="" alt="">--%>
                         <img src="${ctp}/resources/images/hospitalInfo/hospitalInfoNoImg.png" title="" alt="">
                     </div>
                     <div class="article-title">
                         <h6><a href="#">${hospitalInfoVO.sidoCdNm} > ${hospitalInfoVO.sgguCdNm}<c:if test="${hospitalInfoVO.emdongNm!=''}"> > ${hospitalInfoVO.emdongNm}</c:if></a></h6>
                         <h2>${hospitalInfoVO.yadmNm}</h2>
                         <div class="media pt-0">
-<%--                            <div class="avatar" style="margin: auto">--%>
-<%--                                <img src="${ctp}/resources/images/hospitalMarker.png" title="" alt="">--%>
-<%--                            </div>--%>
                             <div class="media-body">
                                 <label><i class="fa fa-location-arrow mr-2" aria-hidden="true"></i>${hospitalInfoVO.addr}</label>
                                 <br/>
@@ -537,228 +536,13 @@
                         </div>
                     </div>
                     <div class="nav tag-cloud mt-0 pt-0 mb-2">
-<%--                        <a href="#">Design</a>--%>
-<%--                        <a href="#">Development</a>--%>
-<%--                        <a href="#">Travel</a>--%>
-<%--                        <a href="#">Web Design</a>--%>
-<%--                        <a href="#">Marketing</a>--%>
-<%--                        <a href="#">Research</a>--%>
-<%--                        <a href="#">Managment</a>--%>
                         <c:forEach var="medicalSubjectInfoVO" items="${medicalSubjectInfoVOS}">
                             <a href="#">${medicalSubjectInfoVO.dgsbjtCdNm}</a>
                         </c:forEach>
                     </div>
                     <hr/>
                     <div class="article-content">
-<%--                        <div class="container">--%>
-<%--                            <div class="row">--%>
-<%--                                <div class="col-md">--%>
-<%--                                    <div class="card ccard radius-t-0 h-100">--%>
-<%--                                        <div class="position-tl w-102 border-t-3 brc-primary-tp3 ml-n1px mt-n1px"></div>--%>
-<%--                                        <!-- the blue line on top -->--%>
-
-<%--                                        <div class="card-header pb-3 brc-secondary-l3">--%>
-<%--                                            <h5 class="card-title mb-2 mb-md-0 text-dark-m3">--%>
-<%--                                                <i class="fa fa-calendar-check-o mr-2" aria-hidden="true"></i>요일별 진료시간--%>
-<%--                                            </h5>--%>
-<%--                                        </div>--%>
-
-<%--                                        <div class="card-body pt-2 pb-1">--%>
-<%--                                            <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">--%>
-<%--                                                <span class="text-default-d3 text-90 text-600">--%>
-<%--                                                    월요일--%>
-<%--                                                </span>--%>
-<%--                                                <span class="ml-auto text-dark-l2 text-nowrap">--%>
-<%--                                                    <c:choose>--%>
-<%--                                                        <c:when test="${detailInfoVO.trmtMonStart=='' || detailInfoVO.trmtMonEnd==''}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:when test="${empty detailInfoVO}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:otherwise>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)<10}">--%>
-<%--                                                                0${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)}:${fn:substring(detailInfoVO.trmtMonStart, detailInfoVO.trmtMonStart.length()-2, detailInfoVO.trmtMonStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)}:${fn:substring(detailInfoVO.trmtMonStart, detailInfoVO.trmtMonStart.length()-2, detailInfoVO.trmtMonStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            ~--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtMonEnd, 0, detailInfoVO.trmtMonEnd.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtMonEnd, 0, detailInfoVO.trmtMonEnd.length()-2)}:${fn:substring(detailInfoVO.trmtMonEnd, detailInfoVO.trmtMonEnd.length()-2, detailInfoVO.trmtMonEnd.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                        </c:otherwise>--%>
-<%--                                                    </c:choose>--%>
-<%--                                                </span>--%>
-<%--                                            </div>--%>
-<%--                                            <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">--%>
-<%--                                                <span class="text-default-d3 text-90 text-600">--%>
-<%--                                                    화요일--%>
-<%--                                                </span>--%>
-<%--                                                <span class="ml-auto text-dark-l2 text-nowrap">--%>
-<%--                                                    <c:choose>--%>
-<%--                                                        <c:when test="${detailInfoVO.trmtTueStart=='' || detailInfoVO.trmtTueEnd==''}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:when test="${empty detailInfoVO}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:otherwise>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)<10}">--%>
-<%--                                                                0${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)}:${fn:substring(detailInfoVO.trmtTueStart, detailInfoVO.trmtTueStart.length()-2, detailInfoVO.trmtTueStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)}:${fn:substring(detailInfoVO.trmtTueStart, detailInfoVO.trmtTueStart.length()-2, detailInfoVO.trmtTueStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            ~--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtTueEnd, 0, detailInfoVO.trmtTueEnd.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtTueEnd, 0, detailInfoVO.trmtTueEnd.length()-2)}:${fn:substring(detailInfoVO.trmtTueEnd, detailInfoVO.trmtTueEnd.length()-2, detailInfoVO.trmtTueEnd.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                        </c:otherwise>--%>
-<%--                                                    </c:choose>--%>
-<%--                                                </span>--%>
-<%--                                            </div>--%>
-<%--                                            <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">--%>
-<%--                                                <span class="text-default-d3 text-90 text-600">--%>
-<%--                                                    수요일--%>
-<%--                                                </span>--%>
-<%--                                                <span class="ml-auto text-dark-l2 text-nowrap">--%>
-<%--                                                    <c:choose>--%>
-<%--                                                        <c:when test="${detailInfoVO.trmtWedStart=='' || detailInfoVO.trmtWedEnd==''}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:when test="${empty detailInfoVO}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:otherwise>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)<10}">--%>
-<%--                                                                0${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)}:${fn:substring(detailInfoVO.trmtWedStart, detailInfoVO.trmtWedStart.length()-2, detailInfoVO.trmtWedStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)}:${fn:substring(detailInfoVO.trmtWedStart, detailInfoVO.trmtWedStart.length()-2, detailInfoVO.trmtWedStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            ~--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtWedEnd, 0, detailInfoVO.trmtWedEnd.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtWedEnd, 0, detailInfoVO.trmtWedEnd.length()-2)}:${fn:substring(detailInfoVO.trmtWedEnd, detailInfoVO.trmtWedEnd.length()-2, detailInfoVO.trmtWedEnd.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                        </c:otherwise>--%>
-<%--                                                    </c:choose>--%>
-<%--                                                </span>--%>
-<%--                                            </div>--%>
-<%--                                            <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">--%>
-<%--                                                <span class="text-default-d3 text-90 text-600">--%>
-<%--                                                    목요일--%>
-<%--                                                </span>--%>
-<%--                                                <span class="ml-auto text-dark-l2 text-nowrap">--%>
-<%--                                                    <c:choose>--%>
-<%--                                                        <c:when test="${detailInfoVO.trmtThuStart=='' || detailInfoVO.trmtThuEnd==''}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:when test="${empty detailInfoVO}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:otherwise>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)<10}">--%>
-<%--                                                                0${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)}:${fn:substring(detailInfoVO.trmtThuStart, detailInfoVO.trmtThuStart.length()-2, detailInfoVO.trmtThuStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)}:${fn:substring(detailInfoVO.trmtThuStart, detailInfoVO.trmtThuStart.length()-2, detailInfoVO.trmtThuStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            ~--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtThuEnd, 0, detailInfoVO.trmtThuEnd.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtThuEnd, 0, detailInfoVO.trmtThuEnd.length()-2)}:${fn:substring(detailInfoVO.trmtThuEnd, detailInfoVO.trmtThuEnd.length()-2, detailInfoVO.trmtThuEnd.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                        </c:otherwise>--%>
-<%--                                                    </c:choose>--%>
-<%--                                                </span>--%>
-<%--                                            </div>--%>
-<%--                                            <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">--%>
-<%--                                                <span class="text-default-d3 text-90 text-600">--%>
-<%--                                                    금요일--%>
-<%--                                                </span>--%>
-<%--                                                <span class="ml-auto text-dark-l2 text-nowrap">--%>
-<%--                                                    <c:choose>--%>
-<%--                                                        <c:when test="${detailInfoVO.trmtFriStart=='' || detailInfoVO.trmtFriEnd==''}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:when test="${empty detailInfoVO}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:otherwise>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)<10}">--%>
-<%--                                                                0${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)}:${fn:substring(detailInfoVO.trmtFriStart, detailInfoVO.trmtFriStart.length()-2, detailInfoVO.trmtFriStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)}:${fn:substring(detailInfoVO.trmtFriStart, detailInfoVO.trmtFriStart.length()-2, detailInfoVO.trmtFriStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            ~--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtFriEnd, 0, detailInfoVO.trmtFriEnd.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtFriEnd, 0, detailInfoVO.trmtFriEnd.length()-2)}:${fn:substring(detailInfoVO.trmtFriEnd, detailInfoVO.trmtFriEnd.length()-2, detailInfoVO.trmtFriEnd.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                        </c:otherwise>--%>
-<%--                                                    </c:choose>--%>
-<%--                                                </span>--%>
-<%--                                            </div>--%>
-<%--                                            <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">--%>
-<%--                                                <span class="text-default-d3 text-90 text-600">--%>
-<%--                                                    토요일--%>
-<%--                                                </span>--%>
-<%--                                                <span class="ml-auto text-dark-l2 text-nowrap">--%>
-<%--                                                    <c:choose>--%>
-<%--                                                        <c:when test="${detailInfoVO.trmtSatStart=='' || detailInfoVO.trmtSatEnd==''}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:when test="${empty detailInfoVO}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:otherwise>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)<10}">--%>
-<%--                                                                0${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)}:${fn:substring(detailInfoVO.trmtSatStart, detailInfoVO.trmtSatStart.length()-2, detailInfoVO.trmtSatStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)}:${fn:substring(detailInfoVO.trmtSatStart, detailInfoVO.trmtSatStart.length()-2, detailInfoVO.trmtSatStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            ~--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtSatEnd, 0, detailInfoVO.trmtSatEnd.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtSatEnd, 0, detailInfoVO.trmtSatEnd.length()-2)}:${fn:substring(detailInfoVO.trmtSatEnd, detailInfoVO.trmtSatEnd.length()-2, detailInfoVO.trmtSatEnd.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                        </c:otherwise>--%>
-<%--                                                    </c:choose>--%>
-<%--                                                </span>--%>
-<%--                                            </div>--%>
-<%--                                            <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">--%>
-<%--                                                <span class="text-default-d3 text-90 text-600">--%>
-<%--                                                    일요일--%>
-<%--                                                </span>--%>
-<%--                                                <span class="ml-auto text-dark-l2 text-nowrap">--%>
-<%--                                                    <c:choose>--%>
-<%--                                                        <c:when test="${detailInfoVO.trmtSunStart=='' || detailInfoVO.trmtSunEnd==''}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:when test="${empty detailInfoVO}">--%>
-<%--                                                            전화 문의--%>
-<%--                                                        </c:when>--%>
-<%--                                                        <c:otherwise>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)<10}">--%>
-<%--                                                                0${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)}:${fn:substring(detailInfoVO.trmtSunStart, detailInfoVO.trmtSunStart.length()-2, detailInfoVO.trmtSunStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)}:${fn:substring(detailInfoVO.trmtSunStart, detailInfoVO.trmtSunStart.length()-2, detailInfoVO.trmtSunStart.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                            ~--%>
-<%--                                                            <c:if test="${fn:substring(detailInfoVO.trmtSunEnd, 0, detailInfoVO.trmtSunEnd.length()-2)>=10}">--%>
-<%--                                                                ${fn:substring(detailInfoVO.trmtSunEnd, 0, detailInfoVO.trmtSunEnd.length()-2)}:${fn:substring(detailInfoVO.trmtSunEnd, detailInfoVO.trmtSunEnd.length()-2, detailInfoVO.trmtSunEnd.length())}--%>
-<%--                                                            </c:if>--%>
-<%--                                                        </c:otherwise>--%>
-<%--                                                    </c:choose>--%>
-<%--                                                </span>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-                        
+                        <div id="map" style="width: 100%; height: 60vh;"></div>
                     </div>
                 </article>
                 <div class="contact-form article-comment">
@@ -862,14 +646,50 @@
                 <!-- Author -->
                 <div class="widget widget-author">
                     <div class="widget-title">
-                        <h3>요일별 진료시간</h3>
+                        <h3><i class="fa fa-calendar-check-o mr-2" aria-hidden="true"></i>진료시간 안내</h3>
                     </div>
                     <div class="widget-body">
                         <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">
                             <span class="text-default-d3 text-90 text-600">
+                                <b>평일 점심시간</b>
+                            </span>
+                            <span class="ml-auto text-dark-l2">
+                                <c:choose>
+                                    <c:when test="${detailInfoVO.lunchWeek==''}">
+                                        전화 문의
+                                    </c:when>
+                                    <c:when test="${empty detailInfoVO}">
+                                        전화 문의
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${detailInfoVO.lunchWeek}
+                                    </c:otherwise>
+                                </c:choose>
+                            </span>
+                        </div>
+                        <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">
+                            <span class="text-default-d3 text-90 text-600">
+                                <b>토요일 점심시간</b>
+                            </span>
+                            <span class="ml-auto text-dark-l2">
+                                <c:choose>
+                                    <c:when test="${detailInfoVO.lunchSat==''}">
+                                        전화 문의
+                                    </c:when>
+                                    <c:when test="${empty detailInfoVO}">
+                                        전화 문의
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${detailInfoVO.lunchSat}
+                                    </c:otherwise>
+                                </c:choose>
+                            </span>
+                        </div>
+                        <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">
+                            <span class="text-default-d3 text-90 text-600">
                                 월요일
                             </span>
-                            <span class="ml-auto text-dark-l2 text-nowrap">
+                            <span class="ml-auto text-dark-l2">
                                 <c:choose>
                                     <c:when test="${detailInfoVO.trmtMonStart=='' || detailInfoVO.trmtMonEnd==''}">
                                         전화 문의
@@ -885,6 +705,9 @@
                                             ${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)}:${fn:substring(detailInfoVO.trmtMonStart, detailInfoVO.trmtMonStart.length()-2, detailInfoVO.trmtMonStart.length())}
                                         </c:if>
                                         ~
+                                        <c:if test="${fn:substring(detailInfoVO.trmtMonEnd, 0, detailInfoVO.trmtMonEnd.length()-2)<10}">
+                                            1${fn:substring(detailInfoVO.trmtMonEnd, 0, detailInfoVO.trmtMonEnd.length()-2)}:${fn:substring(detailInfoVO.trmtMonEnd, detailInfoVO.trmtMonEnd.length()-2, detailInfoVO.trmtMonEnd.length())}
+                                        </c:if>
                                         <c:if test="${fn:substring(detailInfoVO.trmtMonEnd, 0, detailInfoVO.trmtMonEnd.length()-2)>=10}">
                                             ${fn:substring(detailInfoVO.trmtMonEnd, 0, detailInfoVO.trmtMonEnd.length()-2)}:${fn:substring(detailInfoVO.trmtMonEnd, detailInfoVO.trmtMonEnd.length()-2, detailInfoVO.trmtMonEnd.length())}
                                         </c:if>
@@ -896,7 +719,7 @@
                             <span class="text-default-d3 text-90 text-600">
                                 화요일
                             </span>
-                            <span class="ml-auto text-dark-l2 text-nowrap">
+                            <span class="ml-auto text-dark-l2">
                                 <c:choose>
                                     <c:when test="${detailInfoVO.trmtTueStart=='' || detailInfoVO.trmtTueEnd==''}">
                                         전화 문의
@@ -912,6 +735,9 @@
                                             ${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)}:${fn:substring(detailInfoVO.trmtTueStart, detailInfoVO.trmtTueStart.length()-2, detailInfoVO.trmtTueStart.length())}
                                         </c:if>
                                         ~
+                                        <c:if test="${fn:substring(detailInfoVO.trmtTueEnd, 0, detailInfoVO.trmtTueEnd.length()-2)<10}">
+                                            1${fn:substring(detailInfoVO.trmtTueEnd, 0, detailInfoVO.trmtTueEnd.length()-2)}:${fn:substring(detailInfoVO.trmtTueEnd, detailInfoVO.trmtTueEnd.length()-2, detailInfoVO.trmtTueEnd.length())}
+                                        </c:if>
                                         <c:if test="${fn:substring(detailInfoVO.trmtTueEnd, 0, detailInfoVO.trmtTueEnd.length()-2)>=10}">
                                             ${fn:substring(detailInfoVO.trmtTueEnd, 0, detailInfoVO.trmtTueEnd.length()-2)}:${fn:substring(detailInfoVO.trmtTueEnd, detailInfoVO.trmtTueEnd.length()-2, detailInfoVO.trmtTueEnd.length())}
                                         </c:if>
@@ -923,7 +749,7 @@
                             <span class="text-default-d3 text-90 text-600">
                                 수요일
                             </span>
-                            <span class="ml-auto text-dark-l2 text-nowrap">
+                            <span class="ml-auto text-dark-l2">
                                 <c:choose>
                                     <c:when test="${detailInfoVO.trmtWedStart=='' || detailInfoVO.trmtWedEnd==''}">
                                         전화 문의
@@ -939,6 +765,9 @@
                                             ${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)}:${fn:substring(detailInfoVO.trmtWedStart, detailInfoVO.trmtWedStart.length()-2, detailInfoVO.trmtWedStart.length())}
                                         </c:if>
                                         ~
+                                        <c:if test="${fn:substring(detailInfoVO.trmtWedEnd, 0, detailInfoVO.trmtWedEnd.length()-2)<10}">
+                                            1${fn:substring(detailInfoVO.trmtWedEnd, 0, detailInfoVO.trmtWedEnd.length()-2)}:${fn:substring(detailInfoVO.trmtWedEnd, detailInfoVO.trmtWedEnd.length()-2, detailInfoVO.trmtWedEnd.length())}
+                                        </c:if>
                                         <c:if test="${fn:substring(detailInfoVO.trmtWedEnd, 0, detailInfoVO.trmtWedEnd.length()-2)>=10}">
                                             ${fn:substring(detailInfoVO.trmtWedEnd, 0, detailInfoVO.trmtWedEnd.length()-2)}:${fn:substring(detailInfoVO.trmtWedEnd, detailInfoVO.trmtWedEnd.length()-2, detailInfoVO.trmtWedEnd.length())}
                                         </c:if>
@@ -950,7 +779,7 @@
                             <span class="text-default-d3 text-90 text-600">
                                 목요일
                             </span>
-                            <span class="ml-auto text-dark-l2 text-nowrap">
+                            <span class="ml-auto text-dark-l2">
                                 <c:choose>
                                     <c:when test="${detailInfoVO.trmtThuStart=='' || detailInfoVO.trmtThuEnd==''}">
                                         전화 문의
@@ -966,6 +795,9 @@
                                             ${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)}:${fn:substring(detailInfoVO.trmtThuStart, detailInfoVO.trmtThuStart.length()-2, detailInfoVO.trmtThuStart.length())}
                                         </c:if>
                                         ~
+                                        <c:if test="${fn:substring(detailInfoVO.trmtThuEnd, 0, detailInfoVO.trmtThuEnd.length()-2)<10}">
+                                            1${fn:substring(detailInfoVO.trmtThuEnd, 0, detailInfoVO.trmtThuEnd.length()-2)}:${fn:substring(detailInfoVO.trmtThuEnd, detailInfoVO.trmtThuEnd.length()-2, detailInfoVO.trmtThuEnd.length())}
+                                        </c:if>
                                         <c:if test="${fn:substring(detailInfoVO.trmtThuEnd, 0, detailInfoVO.trmtThuEnd.length()-2)>=10}">
                                             ${fn:substring(detailInfoVO.trmtThuEnd, 0, detailInfoVO.trmtThuEnd.length()-2)}:${fn:substring(detailInfoVO.trmtThuEnd, detailInfoVO.trmtThuEnd.length()-2, detailInfoVO.trmtThuEnd.length())}
                                         </c:if>
@@ -977,7 +809,7 @@
                             <span class="text-default-d3 text-90 text-600">
                                 금요일
                             </span>
-                            <span class="ml-auto text-dark-l2 text-nowrap">
+                            <span class="ml-auto text-dark-l2">
                                 <c:choose>
                                     <c:when test="${detailInfoVO.trmtFriStart=='' || detailInfoVO.trmtFriEnd==''}">
                                         전화 문의
@@ -993,6 +825,9 @@
                                             ${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)}:${fn:substring(detailInfoVO.trmtFriStart, detailInfoVO.trmtFriStart.length()-2, detailInfoVO.trmtFriStart.length())}
                                         </c:if>
                                         ~
+                                        <c:if test="${fn:substring(detailInfoVO.trmtFriEnd, 0, detailInfoVO.trmtFriEnd.length()-2)<10}">
+                                            1${fn:substring(detailInfoVO.trmtFriEnd, 0, detailInfoVO.trmtFriEnd.length()-2)}:${fn:substring(detailInfoVO.trmtFriEnd, detailInfoVO.trmtFriEnd.length()-2, detailInfoVO.trmtFriEnd.length())}
+                                        </c:if>
                                         <c:if test="${fn:substring(detailInfoVO.trmtFriEnd, 0, detailInfoVO.trmtFriEnd.length()-2)>=10}">
                                             ${fn:substring(detailInfoVO.trmtFriEnd, 0, detailInfoVO.trmtFriEnd.length()-2)}:${fn:substring(detailInfoVO.trmtFriEnd, detailInfoVO.trmtFriEnd.length()-2, detailInfoVO.trmtFriEnd.length())}
                                         </c:if>
@@ -1004,7 +839,7 @@
                             <span class="text-default-d3 text-90 text-600">
                                 토요일
                             </span>
-                            <span class="ml-auto text-dark-l2 text-nowrap">
+                            <span class="ml-auto text-dark-l2">
                                 <c:choose>
                                     <c:when test="${detailInfoVO.trmtSatStart=='' || detailInfoVO.trmtSatEnd==''}">
                                         전화 문의
@@ -1020,6 +855,9 @@
                                             ${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)}:${fn:substring(detailInfoVO.trmtSatStart, detailInfoVO.trmtSatStart.length()-2, detailInfoVO.trmtSatStart.length())}
                                         </c:if>
                                         ~
+                                        <c:if test="${fn:substring(detailInfoVO.trmtSatEnd, 0, detailInfoVO.trmtSatEnd.length()-2)<10}">
+                                            1${fn:substring(detailInfoVO.trmtSatEnd, 0, detailInfoVO.trmtSatEnd.length()-2)}:${fn:substring(detailInfoVO.trmtSatEnd, detailInfoVO.trmtSatEnd.length()-2, detailInfoVO.trmtSatEnd.length())}
+                                        </c:if>
                                         <c:if test="${fn:substring(detailInfoVO.trmtSatEnd, 0, detailInfoVO.trmtSatEnd.length()-2)>=10}">
                                             ${fn:substring(detailInfoVO.trmtSatEnd, 0, detailInfoVO.trmtSatEnd.length()-2)}:${fn:substring(detailInfoVO.trmtSatEnd, detailInfoVO.trmtSatEnd.length()-2, detailInfoVO.trmtSatEnd.length())}
                                         </c:if>
@@ -1031,7 +869,7 @@
                             <span class="text-default-d3 text-90 text-600">
                                 일요일
                             </span>
-                            <span class="ml-auto text-dark-l2 text-nowrap">
+                            <span class="ml-auto text-dark-l2">
                                 <c:choose>
                                     <c:when test="${detailInfoVO.trmtSunStart=='' || detailInfoVO.trmtSunEnd==''}">
                                         전화 문의
@@ -1047,6 +885,9 @@
                                             ${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)}:${fn:substring(detailInfoVO.trmtSunStart, detailInfoVO.trmtSunStart.length()-2, detailInfoVO.trmtSunStart.length())}
                                         </c:if>
                                         ~
+                                        <c:if test="${fn:substring(detailInfoVO.trmtSunEnd, 0, detailInfoVO.trmtSunEnd.length()-2)<10}">
+                                            1${fn:substring(detailInfoVO.trmtSunEnd, 0, detailInfoVO.trmtSunEnd.length()-2)}:${fn:substring(detailInfoVO.trmtSunEnd, detailInfoVO.trmtSunEnd.length()-2, detailInfoVO.trmtSunEnd.length())}
+                                        </c:if>
                                         <c:if test="${fn:substring(detailInfoVO.trmtSunEnd, 0, detailInfoVO.trmtSunEnd.length()-2)>=10}">
                                             ${fn:substring(detailInfoVO.trmtSunEnd, 0, detailInfoVO.trmtSunEnd.length()-2)}:${fn:substring(detailInfoVO.trmtSunEnd, detailInfoVO.trmtSunEnd.length()-2, detailInfoVO.trmtSunEnd.length())}
                                         </c:if>
@@ -1060,28 +901,81 @@
                 <!-- Trending Post -->
                 <div class="widget widget-post">
                     <div class="widget-title">
-                        <h3>Trending Now</h3>
+                        <h3><i class="fa fa-car mr-2" aria-hidden="true"></i>주차 정보</h3>
                     </div>
                     <div class="widget-body">
-
+                        <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">
+                            <span class="text-default-d3 text-90 text-600">
+                                주차 가능 대수
+                            </span>
+                            <span class="ml-auto text-dark-l2">
+                                <c:choose>
+                                    <c:when test="${empty detailInfoVO}">
+                                        정보 없음 [전화 문의]
+                                    </c:when>
+                                    <c:when test="${detailInfoVO.parkQty==''}">
+                                        정보 없음 [전화 문의]
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${detailInfoVO.parkQty}
+                                    </c:otherwise>
+                                </c:choose>
+                            </span>
+                        </div>
+                        <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">
+                            <span class="text-default-d3 text-90">
+                                주차요금
+                            </span>
+                            <span class="ml-auto text-dark-l2">
+                                <c:choose>
+                                    <c:when test="${empty detailInfoVO}">
+                                        정보 없음 [전화 문의]
+                                    </c:when>
+                                    <c:when test="${detailInfoVO.parkPay==''}">
+                                        정보 없음 [전화 문의]
+                                    </c:when>
+                                    <c:when test="${detailInfoVO.parkPay!=''}">
+                                        <c:if test="${detailInfoVO.parkPay=='Y'}">
+                                            주차 요금 있음
+                                        </c:if>
+                                        <c:if test="${detailInfoVO.parkPay=='N'}">
+                                            주차 요금 없음
+                                        </c:if>
+                                    </c:when>
+                                </c:choose>
+                            </span>
+                        </div>
+                        <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">
+                            <div class="text-default-d3 text-90 text-600">
+                                상세 정보
+                            </div>
+                            <br/>
+                            <div class="ml-auto text-dark-l2">
+                                <c:choose>
+                                    <c:when test="${empty detailInfoVO}">
+                                        정보 없음 [전화 문의]
+                                    </c:when>
+                                    <c:when test="${detailInfoVO.parkNotice==''}">
+                                        정보 없음 [전화 문의]
+                                    </c:when>
+                                    <c:when test="${detailInfoVO.parkNotice!=''}">
+                                        ${detailInfoVO.parkNotice}
+                                    </c:when>
+                                </c:choose>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- End Trending Post -->
                 <!-- widget Tags -->
                 <div class="widget widget-tags">
                     <div class="widget-title">
-                        <h3>Latest Tags</h3>
+                        <h3>
+                            <i class="fa fa-bus mr-2" aria-hidden="true"></i>로렘 입슘
+                        </h3>
                     </div>
                     <div class="widget-body">
-                        <div class="nav tag-cloud">
-                            <a href="#">Design</a>
-                            <a href="#">Development</a>
-                            <a href="#">Travel</a>
-                            <a href="#">Web Design</a>
-                            <a href="#">Marketing</a>
-                            <a href="#">Research</a>
-                            <a href="#">Managment</a>
-                        </div>
+
                     </div>
                 </div>
                 <!-- End widget Tags -->
@@ -1091,5 +985,48 @@
 </div>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+<script src="${ctp}/resources/js/hospitalInfoKakaoMap.js"></script>
+<script>
+
+    $(document).ready(function() {
+        panTo();
+    });
+
+    // 지도 중심 좌표 병원 좌표로 이동
+
+    function panTo() {
+        // 이동할 위도 경도 위치를 생성합니다
+        var moveLatLon = new kakao.maps.LatLng(${hospitalInfoVO.lati}, ${hospitalInfoVO.longi});
+
+        // 지도 중심을 부드럽게 이동시킵니다
+        // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+        map.panTo(moveLatLon);
+    }
+
+
+    function setCenter() {
+        // 이동할 위도 경도 위치를 생성합니다
+        var moveLatLon = new kakao.maps.LatLng(${hospitalInfoVO.lati}, ${hospitalInfoVO.longi});
+
+        // 지도 중심을 이동 시킵니다
+        map.setCenter(moveLatLon);
+    }
+
+    // 병원 위치 마커 표시
+
+    // 마커가 표시될 위치입니다
+    var markerPosition  = new kakao.maps.LatLng(${hospitalInfoVO.lati}, ${hospitalInfoVO.longi});
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+
+    // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+    // marker.setMap(null);
+</script>
 </body>
 </html>

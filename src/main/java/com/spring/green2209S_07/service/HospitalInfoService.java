@@ -3,6 +3,7 @@ package com.spring.green2209S_07.service;
 import com.spring.green2209S_07.vo.DetailInfoVO;
 import com.spring.green2209S_07.vo.HospitalInfoVO;
 import com.spring.green2209S_07.vo.MedicalSubjectInfoVO;
+import com.spring.green2209S_07.vo.TrafficInfoVO;
 
 import java.util.ArrayList;
 
@@ -23,4 +24,6 @@ public interface HospitalInfoService {
     public HospitalInfoVO getHositalInfo(String ykiho);
 
     public DetailInfoVO getDetailInfo(String ykiho);
+
+    public ArrayList<TrafficInfoVO> getTrafficInfo(String ykiho);
 }
