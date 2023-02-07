@@ -31,7 +31,7 @@ public class HospitalInfoController {
         @RequestParam(name = "pag", defaultValue = "1") int pag,
         @RequestParam(name = "pageSize", defaultValue = "5") int pageSize,
         @RequestParam(name = "medicalSubjectCode", defaultValue = "49") String medicalSubjectCode,
-        @RequestParam(name = "medicalSubject", defaultValue = "") String medicalSubject,
+//        @RequestParam(name = "medicalSubject", defaultValue = "") String medicalSubject,
         @RequestParam(name = "regionCode", defaultValue = "") String regionCode,
         @RequestParam(name = "sidoCd", defaultValue = "110000") String sidoCd,
         @RequestParam(name = "sgguCd", defaultValue = "110017") String sgguCd,
@@ -69,13 +69,9 @@ public class HospitalInfoController {
             }
         }
 
-        System.out.println("regionCode: "+regionCode);
+        // 선택한 항목에 해당하는 병원 리스트 가져오기 (페이지 처리)
 
         int totRecCnt=hospitalInfoService.getTotRecCnt(medicalSubjectCode, regionCode, regionFlag, yadmNm);
-
-        System.out.println("총 개수: "+totRecCnt);
-
-//        System.out.println("totRecCnt: "+totRecCnt);
 
         PageVO pageVO=pageProcess.pageNation(pag, pageSize, totRecCnt);
 
@@ -100,7 +96,7 @@ public class HospitalInfoController {
         ArrayList<ArrayList<MedicalSubjectInfoVO>> medicalSubjectInfoListVOS=new ArrayList<>();
 
         for(int i=0; i<hospitalInfoVOS.size(); i++) {
-            medicalSubjectInfoListVOS.add(hospitalInfoService.getMedicalSubjectList(hospitalInfoVOS.get(i).getYkiho()));
+            medicalSubjectInfoListVOS.add(hospitalInfoService.getMedicalSubjectInfoList(hospitalInfoVOS.get(i).getYkiho()));
         }
 
         model.addAttribute("medicalSubjectInfoListVOS", medicalSubjectInfoListVOS);
@@ -123,6 +119,69 @@ public class HospitalInfoController {
 
         model.addAttribute("sidoListVOS", sidoListVOS);
 
+        // medicalSubjectCode에 따른 진료과목 문자 처리
+
+        String medicalSubject="";
+
+        if(medicalSubjectCode.equals("49")) {
+            medicalSubject="치과";
+        }
+        else if(medicalSubjectCode.equals("12")) {
+            medicalSubject="안과";
+        }
+        else if(medicalSubjectCode.equals("14")) {
+            medicalSubject="피부과";
+        }
+        else if(medicalSubjectCode.equals("8")) {
+            medicalSubject="성형외과";
+        }
+        else if(medicalSubjectCode.equals("10")) {
+            medicalSubject="산부인과";
+        }
+        else if(medicalSubjectCode.equals("3")) {
+            medicalSubject="정신의학과";
+        }
+        else if(medicalSubjectCode.equals("15")) {
+            medicalSubject="비뇨기과";
+        }
+        else if(medicalSubjectCode.equals("5")) {
+            medicalSubject="정형외과";
+        }
+        else if(medicalSubjectCode.equals("9")) {
+            medicalSubject="마취통증의학과";
+        }
+        else if(medicalSubjectCode.equals("6")) {
+            medicalSubject="신경외과";
+        }
+        else if(medicalSubjectCode.equals("21")) {
+            medicalSubject="재활의학과";
+        }
+        else if(medicalSubjectCode.equals("16")) {
+            medicalSubject="영상의학과";
+        }
+        else if(medicalSubjectCode.equals("4")) {
+            medicalSubject="외과";
+        }
+        else if(medicalSubjectCode.equals("2")) {
+            medicalSubject="신경과";
+        }
+        else if(medicalSubjectCode.equals("11")) {
+            medicalSubject="소아과";
+        }
+        else if(medicalSubjectCode.equals("1")) {
+            medicalSubject="내과";
+        }
+        else if(medicalSubjectCode.equals("13")) {
+            medicalSubject="이비인후과";
+        }
+        else if(medicalSubjectCode.equals("23")) {
+            medicalSubject="가정의학과";
+        }
+        else if(medicalSubjectCode.equals("99")) {
+            medicalSubject="한의원";
+        }
+
+
         // 나머지 필요한 항목들 던져주기
 
         model.addAttribute("medicalSubject", medicalSubject);
@@ -138,6 +197,29 @@ public class HospitalInfoController {
     public ArrayList<HospitalInfoVO> getSgguListPost(Model model, String sidoCd) {
 
         return hospitalInfoService.getSgguList(sidoCd);
+    }
+
+    // 병원 상세 정보 페이지 이동
+
+    @RequestMapping(value = "hospitalInfo", method = RequestMethod.GET)
+    public String hospitalInfoGet(Model model, String ykiho) {
+
+        // 병원 기본 정보 가져오기
+
+        HospitalInfoVO hospitalInfoVO=hospitalInfoService.getHositalInfo(ykiho);
+        model.addAttribute("hospitalInfoVO", hospitalInfoVO);
+
+        // 진료과목 정보 가져오기
+
+        ArrayList<MedicalSubjectInfoVO> medicalSubjectInfoVOS=hospitalInfoService.getMedicalSubjectInfoList(ykiho);
+        model.addAttribute("medicalSubjectInfoVOS", medicalSubjectInfoVOS);
+
+        // 병원 상세 정보 가져오기
+
+        DetailInfoVO detailInfoVO=hospitalInfoService.getDetailInfo(ykiho);
+        model.addAttribute("detailInfoVO", detailInfoVO);
+
+        return "hospitalInfo/hospitalInfo";
     }
 
 

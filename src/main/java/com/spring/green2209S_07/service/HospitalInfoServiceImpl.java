@@ -15,8 +15,8 @@ public class HospitalInfoServiceImpl implements HospitalInfoService {
     HospitalInfoDAO hospitalInfoDAO;
 
     @Override
-    public ArrayList<MedicalSubjectInfoVO> getMedicalSubjectList(String ykiho) {
-        return hospitalInfoDAO.getMedicalSubjectList(ykiho);
+    public ArrayList<MedicalSubjectInfoVO> getMedicalSubjectInfoList(String ykiho) {
+        return hospitalInfoDAO.getMedicalSubjectInfoList(ykiho);
     }
 
     @Override
@@ -54,6 +54,16 @@ public class HospitalInfoServiceImpl implements HospitalInfoService {
         System.out.println("getHospitalInfoList 서비스: "+yadmNm);
 
         return hospitalInfoDAO.getHospitalInfoList(startIndexNo, pageSize, medicalSubjectCode, regionCode, regionFlag, yadmNm);
+    }
+
+    @Override
+    public HospitalInfoVO getHositalInfo(String ykiho) {
+        return hospitalInfoDAO.getHositalInfo(ykiho);
+    }
+
+    @Override
+    public DetailInfoVO getDetailInfo(String ykiho) {
+        return hospitalInfoDAO.getDetailInfo(ykiho);
     }
 
 

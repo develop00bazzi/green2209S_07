@@ -257,7 +257,7 @@
         <div class="col-lg-12">
             <div class="show-results mt-5">
                 <div class="float-left p-2">
-                    <h5 class="text-dark mb-0 pt-2">${region}의 ${medicalSubject}</h5>
+                    <h3 class="text-dark mb-0">${region}의 ${medicalSubject}</h3>
                 </div>
                 <form id="hospitalInfoSearchForm">
                     <div class="sort-button float-right">
@@ -273,7 +273,7 @@
                                     <option value="3" <c:if test="${medicalSubject=='정신의학과'}">selected</c:if>>정신의학과</option>
                                     <option value="15" <c:if test="${medicalSubject=='비뇨기과'}">selected</c:if>>비뇨기과</option>
                                     <option value="5" <c:if test="${medicalSubject=='정형외과'}">selected</c:if>>정형외과</option>
-                                    <option value="9" <c:if test="${medicalSubject=='마치통증의학과'}">selected</c:if>>마치통증의학과</option>
+                                    <option value="9" <c:if test="${medicalSubject=='마취통증의학과'}">selected</c:if>>마치통증의학과</option>
                                     <option value="6" <c:if test="${medicalSubject=='신경외과'}">selected</c:if>>신경외과</option>
                                     <option value="21" <c:if test="${medicalSubject=='재활의학과'}">selected</c:if>>재활의학과</option>
                                     <option value="16" <c:if test="${medicalSubject=='영상의학과'}">selected</c:if>>영상의학과</option>
@@ -328,7 +328,7 @@
         <div class="col-lg-6 p-2">
             <div class="candidates-listing-item algin-self-center p-2 card" style="height: 80vh; overflow: auto;">
                 <c:forEach var="hospitalInfoVO" items="${hospitalInfoVOS}" varStatus="st">
-                    <div class="list-grid-item mt-2 p-2" style="cursor:pointer;" onclick="location.href='';">
+                    <div class="list-grid-item mt-2 p-2" style="cursor:pointer;" onclick="location.href='${ctp}/hospitalInfo/hospitalInfo?ykiho=${hospitalInfoVO.ykiho}';">
                         <div class="row">
                             <div class="col-md-12">
 <%--                                <div class="candidates-img float-left mr-4">--%>
@@ -373,67 +373,137 @@
                                                         <c:if test="${hospitalInfoVO.ykiho==detailInfoVO.ykiho}">
                                                             <c:choose>
                                                                 <c:when test="${todayStr=='월'}">
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)<10}">
-                                                                        0${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)}:${fn:substring(detailInfoVO.trmtMonStart, detailInfoVO.trmtMonStart.length()-2, detailInfoVO.trmtMonStart.length())}
-                                                                    </c:if>
-                                                                    ~
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtMonEnd, 0, detailInfoVO.trmtMonEnd.length()-2)>10}">
-                                                                        ${fn:substring(detailInfoVO.trmtMonEnd, 0, detailInfoVO.trmtMonEnd.length()-2)}:${fn:substring(detailInfoVO.trmtMonEnd, detailInfoVO.trmtMonEnd.length()-2, detailInfoVO.trmtMonEnd.length())}
-                                                                    </c:if>
+                                                                    <c:choose>
+                                                                        <c:when test="${detailInfoVO.trmtMonStart=='' || detailInfoVO.trmtMonEnd==''}">
+                                                                            전화문의
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)<10}">
+                                                                                0${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)}:${fn:substring(detailInfoVO.trmtMonStart, detailInfoVO.trmtMonStart.length()-2, detailInfoVO.trmtMonStart.length())}
+                                                                            </c:if>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtMonStart, 0, detailInfoVO.trmtMonStart.length()-2)}:${fn:substring(detailInfoVO.trmtMonStart, detailInfoVO.trmtMonStart.length()-2, detailInfoVO.trmtMonStart.length())}
+                                                                            </c:if>
+                                                                            ~
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtMonEnd, 0, detailInfoVO.trmtMonEnd.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtMonEnd, 0, detailInfoVO.trmtMonEnd.length()-2)}:${fn:substring(detailInfoVO.trmtMonEnd, detailInfoVO.trmtMonEnd.length()-2, detailInfoVO.trmtMonEnd.length())}
+                                                                            </c:if>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:when>
                                                                 <c:when test="${todayStr=='화'}">
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)<10}">
-                                                                        0${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)}:${fn:substring(detailInfoVO.trmtTueStart, detailInfoVO.trmtTueStart.length()-2, detailInfoVO.trmtTueStart.length())}
-                                                                    </c:if>
-                                                                    ~
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtTueEnd, 0, detailInfoVO.trmtTueEnd.length()-2)>10}">
-                                                                        ${fn:substring(detailInfoVO.trmtTueEnd, 0, detailInfoVO.trmtTueEnd.length()-2)}:${fn:substring(detailInfoVO.trmtTueEnd, detailInfoVO.trmtTueEnd.length()-2, detailInfoVO.trmtTueEnd.length())}
-                                                                    </c:if>
+                                                                    <c:choose>
+                                                                        <c:when test="${detailInfoVO.trmtTueStart=='' || detailInfoVO.trmtTueEnd==''}">
+                                                                            전화 문의
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)<10}">
+                                                                                0${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)}:${fn:substring(detailInfoVO.trmtTueStart, detailInfoVO.trmtTueStart.length()-2, detailInfoVO.trmtTueStart.length())}
+                                                                            </c:if>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtTueStart, 0, detailInfoVO.trmtTueStart.length()-2)}:${fn:substring(detailInfoVO.trmtTueStart, detailInfoVO.trmtTueStart.length()-2, detailInfoVO.trmtTueStart.length())}
+                                                                            </c:if>
+                                                                            ~
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtTueEnd, 0, detailInfoVO.trmtTueEnd.length()-2)>10}">
+                                                                                ${fn:substring(detailInfoVO.trmtTueEnd, 0, detailInfoVO.trmtTueEnd.length()-2)}:${fn:substring(detailInfoVO.trmtTueEnd, detailInfoVO.trmtTueEnd.length()-2, detailInfoVO.trmtTueEnd.length())}
+                                                                            </c:if>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:when>
                                                                 <c:when test="${todayStr=='수'}">
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)<10}">
-                                                                        0${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)}:${fn:substring(detailInfoVO.trmtWedStart, detailInfoVO.trmtWedStart.length()-2, detailInfoVO.trmtWedStart.length())}
-                                                                    </c:if>
-                                                                    ~
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtWedEnd, 0, detailInfoVO.trmtWedEnd.length()-2)>10}">
-                                                                        ${fn:substring(detailInfoVO.trmtWedEnd, 0, detailInfoVO.trmtWedEnd.length()-2)}:${fn:substring(detailInfoVO.trmtWedEnd, detailInfoVO.trmtWedEnd.length()-2, detailInfoVO.trmtWedEnd.length())}
-                                                                    </c:if>
+                                                                    <c:choose>
+                                                                        <c:when test="${detailInfoVO.trmtWedStart=='' || detailInfoVO.trmtWedEnd==''}">
+                                                                            전화 문의
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)<10}">
+                                                                                0${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)}:${fn:substring(detailInfoVO.trmtWedStart, detailInfoVO.trmtWedStart.length()-2, detailInfoVO.trmtWedStart.length())}
+                                                                            </c:if>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtWedStart, 0, detailInfoVO.trmtWedStart.length()-2)}:${fn:substring(detailInfoVO.trmtWedStart, detailInfoVO.trmtWedStart.length()-2, detailInfoVO.trmtWedStart.length())}
+                                                                            </c:if>
+                                                                            ~
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtWedEnd, 0, detailInfoVO.trmtWedEnd.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtWedEnd, 0, detailInfoVO.trmtWedEnd.length()-2)}:${fn:substring(detailInfoVO.trmtWedEnd, detailInfoVO.trmtWedEnd.length()-2, detailInfoVO.trmtWedEnd.length())}
+                                                                            </c:if>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:when>
                                                                 <c:when test="${todayStr=='목'}">
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)<10}">
-                                                                        0${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)}:${fn:substring(detailInfoVO.trmtThuStart, detailInfoVO.trmtThuStart.length()-2, detailInfoVO.trmtThuStart.length())}
-                                                                    </c:if>
-                                                                    ~
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtThuEnd, 0, detailInfoVO.trmtThuEnd.length()-2)>10}">
-                                                                        ${fn:substring(detailInfoVO.trmtThuEnd, 0, detailInfoVO.trmtThuEnd.length()-2)}:${fn:substring(detailInfoVO.trmtThuEnd, detailInfoVO.trmtThuEnd.length()-2, detailInfoVO.trmtThuEnd.length())}
-                                                                    </c:if>
+                                                                    <c:choose>
+                                                                        <c:when test="${detailInfoVO.trmtThuStart=='' || detailInfoVO.trmtThuEnd==''}">
+                                                                            전화 문의
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)<10}">
+                                                                                0${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)}:${fn:substring(detailInfoVO.trmtThuStart, detailInfoVO.trmtThuStart.length()-2, detailInfoVO.trmtThuStart.length())}
+                                                                            </c:if>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtThuStart, 0, detailInfoVO.trmtThuStart.length()-2)}:${fn:substring(detailInfoVO.trmtThuStart, detailInfoVO.trmtThuStart.length()-2, detailInfoVO.trmtThuStart.length())}
+                                                                            </c:if>
+                                                                            ~
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtThuEnd, 0, detailInfoVO.trmtThuEnd.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtThuEnd, 0, detailInfoVO.trmtThuEnd.length()-2)}:${fn:substring(detailInfoVO.trmtThuEnd, detailInfoVO.trmtThuEnd.length()-2, detailInfoVO.trmtThuEnd.length())}
+                                                                            </c:if>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:when>
                                                                 <c:when test="${todayStr=='금'}">
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)<10}">
-                                                                        0${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)}:${fn:substring(detailInfoVO.trmtFriStart, detailInfoVO.trmtFriStart.length()-2, detailInfoVO.trmtFriStart.length())}
-                                                                    </c:if>
-                                                                    ~
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtFriEnd, 0, detailInfoVO.trmtFriEnd.length()-2)>10}">
-                                                                        ${fn:substring(detailInfoVO.trmtFriEnd, 0, detailInfoVO.trmtFriEnd.length()-2)}:${fn:substring(detailInfoVO.trmtFriEnd, detailInfoVO.trmtFriEnd.length()-2, detailInfoVO.trmtFriEnd.length())}
-                                                                    </c:if>
+                                                                    <c:choose>
+                                                                        <c:when test="${detailInfoVO.trmtFriStart=='' || detailInfoVO.trmtFriEnd==''}">
+                                                                            전화 문의
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)<10}">
+                                                                                0${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)}:${fn:substring(detailInfoVO.trmtFriStart, detailInfoVO.trmtFriStart.length()-2, detailInfoVO.trmtFriStart.length())}
+                                                                            </c:if>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtFriStart, 0, detailInfoVO.trmtFriStart.length()-2)}:${fn:substring(detailInfoVO.trmtFriStart, detailInfoVO.trmtFriStart.length()-2, detailInfoVO.trmtFriStart.length())}
+                                                                            </c:if>
+                                                                            ~
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtFriEnd, 0, detailInfoVO.trmtFriEnd.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtFriEnd, 0, detailInfoVO.trmtFriEnd.length()-2)}:${fn:substring(detailInfoVO.trmtFriEnd, detailInfoVO.trmtFriEnd.length()-2, detailInfoVO.trmtFriEnd.length())}
+                                                                            </c:if>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:when>
                                                                 <c:when test="${todayStr=='토'}">
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)<10}">
-                                                                        0${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)}:${fn:substring(detailInfoVO.trmtSatStart, detailInfoVO.trmtSatStart.length()-2, detailInfoVO.trmtSatStart.length())}
-                                                                    </c:if>
-                                                                    ~
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtSatEnd, 0, detailInfoVO.trmtSatEnd.length()-2)>10}">
-                                                                        ${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)}:${fn:substring(detailInfoVO.trmtSatEnd, detailInfoVO.trmtSatEnd.length()-2, detailInfoVO.trmtSatStart.length())}
-                                                                    </c:if>
+                                                                    <c:choose>
+                                                                        <c:when test="${detailInfoVO.trmtSatStart=='' || detailInfoVO.trmtSatEnd==''}">
+                                                                            전화 문의
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)<10}">
+                                                                                0${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)}:${fn:substring(detailInfoVO.trmtSatStart, detailInfoVO.trmtSatStart.length()-2, detailInfoVO.trmtSatStart.length())}
+                                                                            </c:if>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)}:${fn:substring(detailInfoVO.trmtSatStart, detailInfoVO.trmtSatStart.length()-2, detailInfoVO.trmtSatStart.length())}
+                                                                            </c:if>
+                                                                            ~
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtSatEnd, 0, detailInfoVO.trmtSatEnd.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtSatStart, 0, detailInfoVO.trmtSatStart.length()-2)}:${fn:substring(detailInfoVO.trmtSatEnd, detailInfoVO.trmtSatEnd.length()-2, detailInfoVO.trmtSatStart.length())}
+                                                                            </c:if>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:when>
                                                                 <c:when test="${todayStr=='일'}">
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)<10}">
-                                                                        0${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)}:${fn:substring(detailInfoVO.trmtSunStart, detailInfoVO.trmtSunStart.length()-2, detailInfoVO.trmtSunStart.length())}
-                                                                    </c:if>
-                                                                    ~
-                                                                    <c:if test="${fn:substring(detailInfoVO.trmtSunEnd, 0, detailInfoVO.trmtSunEnd.length()-2)>10}">
-                                                                        ${fn:substring(detailInfoVO.trmtSunEnd, 0, detailInfoVO.trmtSunEnd.length()-2)}:${fn:substring(detailInfoVO.trmtSunEnd, detailInfoVO.trmtSunEnd.length()-2, detailInfoVO.trmtSunEnd.length())}
-                                                                    </c:if>
+                                                                    <c:choose>
+                                                                        <c:when test="${detailInfoVO.trmtSunStart=='' || detailInfoVO.trmtSunEnd==''}">
+                                                                            전화 문의
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)<10}">
+                                                                                0${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)}:${fn:substring(detailInfoVO.trmtSunStart, detailInfoVO.trmtSunStart.length()-2, detailInfoVO.trmtSunStart.length())}
+                                                                            </c:if>
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtSunStart, 0, detailInfoVO.trmtSunStart.length()-2)}:${fn:substring(detailInfoVO.trmtSunStart, detailInfoVO.trmtSunStart.length()-2, detailInfoVO.trmtSunStart.length())}
+                                                                            </c:if>
+                                                                            ~
+                                                                            <c:if test="${fn:substring(detailInfoVO.trmtSunEnd, 0, detailInfoVO.trmtSunEnd.length()-2)>=10}">
+                                                                                ${fn:substring(detailInfoVO.trmtSunEnd, 0, detailInfoVO.trmtSunEnd.length()-2)}:${fn:substring(detailInfoVO.trmtSunEnd, detailInfoVO.trmtSunEnd.length()-2, detailInfoVO.trmtSunEnd.length())}
+                                                                            </c:if>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:when>
                                                             </c:choose>
                                                         </c:if>

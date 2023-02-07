@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 @Repository
 public interface MainDAO {
-    ArrayList<HospitalInfoVO> getSidoList();
+    public ArrayList<HospitalInfoVO> getSidoList();
 
-    ArrayList<HospitalInfoVO> getSgguList();
+    public ArrayList<HospitalInfoVO> getSgguList();
+
 }

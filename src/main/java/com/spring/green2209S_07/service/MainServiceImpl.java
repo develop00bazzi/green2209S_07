@@ -22,4 +22,5 @@ public class MainServiceImpl implements MainService {
     public ArrayList<HospitalInfoVO> getSgguList() {
         return mainDAO.getSgguList();
     }
+
 }

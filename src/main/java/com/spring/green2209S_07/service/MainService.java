@@ -9,4 +9,5 @@ public interface MainService {
     public ArrayList<HospitalInfoVO> getSidoList();
 
     public ArrayList<HospitalInfoVO> getSgguList();
+
 }

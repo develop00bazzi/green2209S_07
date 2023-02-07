@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 @Repository
 public interface HospitalInfoDAO {
-    public ArrayList<MedicalSubjectInfoVO> getMedicalSubjectList(@Param("ykiho") String ykiho);
+
+    public ArrayList<MedicalSubjectInfoVO> getMedicalSubjectInfoList(@Param("ykiho") String ykiho);
 
     public ArrayList<DetailInfoVO> getDetailInfoList(@Param("ykiho") String ykiho);
 
@@ -20,5 +21,9 @@ public interface HospitalInfoDAO {
 
     public int getTotRecCnt(@Param("medicalSubjectCode") String medicalSubjectCode, @Param("regionCode") String regionCode, @Param("regionFlag") String regionFlag, @Param("yadmNm") String yadmNm);
 
-    ArrayList<HospitalInfoVO> getHospitalInfoList(@Param("startIndexNo") int startIndexNo, @Param("pageSize") int pageSize, @Param("medicalSubjectCode") String medicalSubjectCode, @Param("regionCode") String regionCode, @Param("regionFlag") String regionFlag, @Param("yadmNm") String yadmNm);
+    public ArrayList<HospitalInfoVO> getHospitalInfoList(@Param("startIndexNo") int startIndexNo, @Param("pageSize") int pageSize, @Param("medicalSubjectCode") String medicalSubjectCode, @Param("regionCode") String regionCode, @Param("regionFlag") String regionFlag, @Param("yadmNm") String yadmNm);
+
+    public HospitalInfoVO getHositalInfo(@Param("ykiho") String ykiho);
+
+    public DetailInfoVO getDetailInfo(@Param("ykiho") String ykiho);
 }
