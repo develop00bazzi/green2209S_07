@@ -18,4 +18,5 @@ public interface MemberDAO {
     public void setEmailAuthKey(@Param("vo") MemberVO vo, @Param("authKey") String authKey);
 
     public void setMemberAuthStatusUpdate(@Param("vo") MemberVO vo);
+
 }

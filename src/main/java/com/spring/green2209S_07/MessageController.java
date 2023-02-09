@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MessageController {
     @RequestMapping(value = "/msg/{msgFlag}", method = RequestMethod.GET)
     public String msgGet(@PathVariable String msgFlag, Model model,
-                         @RequestParam(value = "mid", defaultValue = "", required = false) String mid,
+                         @RequestParam(value = "nickName", defaultValue = "", required = false) String nickName,
                          @RequestParam(value = "flag", defaultValue = "", required = false) String flag
                          ) {
 
@@ -32,7 +32,7 @@ public class MessageController {
             model.addAttribute("url", "member/memberJoin");
         }
         else if(msgFlag.equals("memberLoginOk")) {
-            model.addAttribute("msg", mid+"님 로그인되었습니다!");
+            model.addAttribute("msg", nickName+"님 로그인되었습니다!");
             model.addAttribute("url", "");
         }
         else if(msgFlag.equals("memberLoginNo")) {
@@ -40,7 +40,7 @@ public class MessageController {
             model.addAttribute("url", "member/memberLogin");
         }
         else if(msgFlag.equals("memberLogout")) {
-            model.addAttribute("msg", mid+"님 로그아웃하셨습니다!");
+            model.addAttribute("msg", nickName+"님 로그아웃하셨습니다!");
             model.addAttribute("url", "member/memberLogin");
         }
         else if(msgFlag.equals("memberEmailAuthOk")) {
@@ -51,6 +51,15 @@ public class MessageController {
             model.addAttribute("msg", "이메일 인증에 실패하였습니다!");
             model.addAttribute("url", "member/memberLogin");
         }
+        else if(msgFlag.equals("kakaoAuthNo")) {
+            model.addAttribute("msg", "카카오 계정 정보가 존재하지 않습니다!");
+            model.addAttribute("url", "member/memberLogin");
+        }
+        else if(msgFlag.equals("socialJoinOk")) {
+            model.addAttribute("msg", "회원가입이 완료되었습니다!");
+            model.addAttribute("url", "member/memberLogin");
+        }
+
 
 
         return "include/message";

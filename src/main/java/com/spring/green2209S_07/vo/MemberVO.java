@@ -16,4 +16,5 @@ public class MemberVO {
     private int authStatus;
     private int memClass;
     private String memDrop;
+    private String joinKey;
 }

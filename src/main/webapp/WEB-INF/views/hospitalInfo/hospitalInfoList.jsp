@@ -332,7 +332,13 @@
                                         <br/>
                                         <li class="list-inline-item">
                                             <p class="f-15 mb-0">
-                                                <i class="fa fa-phone mr-2" aria-hidden="true"></i><a href="tel:${hospitalInfoVO.telno}">${hospitalInfoVO.telno}</a>
+                                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                                <c:if test="${hospitalInfoVO.telno==''}">
+                                                    정보 없음
+                                                </c:if>
+                                                <c:if test="${hospitalInfoVO.telno!=''}">
+                                                    <a href="tel:${hospitalInfoVO.telno}">${hospitalInfoVO.telno}</a>
+                                                </c:if>
                                             </p>
                                         </li>
                                         <br/>

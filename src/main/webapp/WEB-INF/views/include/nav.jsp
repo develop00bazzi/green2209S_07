@@ -23,7 +23,8 @@
                 </c:if>
                 <c:if test="${!empty sMemClass}">
                     <a class="w3-bar-item w3-button">${sNickName}</a>
-                    <a href="${ctp}/member/memberLogout" class="w3-bar-item w3-button">로그아웃</a>
+<%--                    <a href="${ctp}/member/memberLogout" class="w3-bar-item w3-button">로그아웃</a>--%>
+                    <a href="https://kauth.kakao.com/oauth/logout?client_id=cf2add5f1bbc94e397370a3b344e9e28&logout_redirect_uri=http://192.168.0.8:9090/green2209S_07/member/memberLogout" class="w3-bar-item w3-button">로그아웃</a>
                     <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> 마이페이지</a>
                 </c:if>
                 <a href="#pricing" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> 등등등</a>
@@ -31,8 +32,7 @@
             </div>
         </div>
         <!-- Hide right-floated links on small screens and replace them with a menu icon -->
-        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
-           onclick="w3_open()">
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
             <i class="fa fa-bars"></i>
         </a>
     </div>
@@ -50,7 +50,8 @@
     </c:if>
     <c:if test="${!empty sMemClass}">
         <a class="w3-bar-item w3-button">${sNickName}</a>
-        <a href="${ctp}/member/memberLogout" class="w3-bar-item w3-button">로그아웃</a>
+<%--        <a href="${ctp}/member/memberLogout" class="w3-bar-item w3-button">로그아웃</a>--%>
+        <a href="https://kauth.kakao.com/oauth/logout?client_id=cf2add5f1bbc94e397370a3b344e9e28&logout_redirect_uri=http://192.168.0.8:9090/green2209S_07/member/memberLogout" class="w3-bar-item w3-button">로그아웃</a>
         <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">마이페이지</a>
     </c:if>
     <a href="#pricing" onclick="w3_close()" class="w3-bar-item w3-button">등등등</a>

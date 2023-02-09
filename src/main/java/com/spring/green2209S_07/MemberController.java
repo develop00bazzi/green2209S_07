@@ -1,5 +1,6 @@
 package com.spring.green2209S_07;
 
+import com.spring.green2209S_07.service.KakaoService;
 import com.spring.green2209S_07.service.MemberService;
 import com.spring.green2209S_07.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,16 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
     @Autowired
     MemberService memberService;
+    @Autowired
+    KakaoService kakaoService;
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
@@ -47,7 +52,7 @@ public class MemberController {
         @RequestParam(name = "mid", defaultValue = "", required = false) String mid,
         @RequestParam(name = "pwd", defaultValue = "", required = false) String pwd,
         @RequestParam(name = "idSave", defaultValue = "", required = false) String idSave
-        ) {
+        ) throws UnsupportedEncodingException {
         MemberVO vo=memberService.getMemberInfoMid(mid);
 
         // VO에 해당 값이 존재하고, 비밀번호가 일치, 탈퇴 신청한 회원이 아닌 경우 로그인 처리
@@ -77,7 +82,9 @@ public class MemberController {
                 }
             }
 
-            return "redirect:/msg/memberLoginOk?mid="+mid;
+            String encodeNickName = URLEncoder.encode(vo.getNickName(), "UTF-8");
+
+            return "redirect:/msg/memberLoginOk?nickName="+encodeNickName;
         }
         else {
             return "redirect:/msg/memberLoginNo";
@@ -88,12 +95,30 @@ public class MemberController {
     // 회원 로그아웃
 
     @RequestMapping(value = "/memberLogout", method = RequestMethod.GET)
-    public String memberLogoutGet(HttpSession session) {
+    public String memberLogoutGet(HttpSession session) throws UnsupportedEncodingException {
 
         String mid=(String)session.getAttribute("sMid");
+        String nickName=(String)session.getAttribute("sNickName");
+
+        String encodeNickName = URLEncoder.encode(nickName, "UTF-8");
+
+        // 카카로 로그인 사용시 해당 유저의 access_Token을 사용하여 로그아웃 처리
+
+        String access_Token=(String)session.getAttribute("access_Token");
+        String user_id=(String)session.getAttribute("user_id");
+
+        System.out.println("로그아웃 access_Token: "+access_Token);
+
+        if(!"".equals(access_Token) && access_Token!=null) {
+
+            kakaoService.kakaoLogout(access_Token);
+            kakaoService.kakaoLogoutAdminKey(user_id);
+            session.removeAttribute("access_Token");
+
+        }
         session.invalidate();
 
-        return "redirect:/msg/memberLogout?mid="+mid;
+        return "redirect:/msg/memberLogout?nickName="+encodeNickName;
     }
 
     // 회원 가입 폼 이동
@@ -129,9 +154,17 @@ public class MemberController {
 
         vo.setPwd(passwordEncoder.encode(vo.getPwd()));
 
+        // 일반 회원가입인 경우 joinKey를 default로 설정
+
+        vo.setJoinKey("default");
+
         // 모든 체크, 비밀번호 암호화 처리 후 DB에 저장 처리
 
         memberService.setMemberJoinOk(vo);
+
+        // 이메일 인증상태 소셜 회원가입과 구분하기 위해 0으로 지정
+
+        vo.setAuthStatus(0);
 
         // 이메일 인증을 위한 이메일 발송 처리
         // 사진 파일 경로
@@ -142,6 +175,45 @@ public class MemberController {
         memberService.memberJoinOkEmailSend(vo, bannerImg);
 
         return "redirect:/msg/memberJoinOk";
+    }
+
+    // 소셜 로그인 시 정보가 없을 경우 소셜 회원가입 따로 처리
+
+    @RequestMapping(value = "/socialJoin", method = RequestMethod.POST)
+    public String socialJoinPost(MemberVO vo) {
+
+        // 아이디 중복 체크
+
+        if(memberService.getMemberInfoMid(vo.getMid())!=null) {
+            return "redirect:/msg/memberIdOverYes";
+        }
+
+        // 닉네임 중복 체크
+
+        if(memberService.getMemberInfoNickName(vo.getNickName())!=null) {
+            return "redirect:/msg/memberNickNameOverYes";
+        }
+
+        // 이메일 중복 체크
+
+        if(memberService.getMemberInfoEmail(vo.getEmail())!=null) {
+            return "redirect:/msg/memberEmailOverYes";
+        }
+
+        // 비밀번호 암호화 처리
+
+        vo.setPwd(passwordEncoder.encode(vo.getPwd()));
+
+        // 소셜 로그인 방식 회원가입 처리시 이메일 인증은 필요가 없으니 authStatus를 1로 설정
+
+        vo.setAuthStatus(1);
+
+        // 모든 체크, 비밀번호 암호화 처리 후 DB에 저장 처리
+
+        memberService.setMemberJoinOk(vo);
+
+        return "redirect:/msg/socialJoinOk";
+
     }
 
 

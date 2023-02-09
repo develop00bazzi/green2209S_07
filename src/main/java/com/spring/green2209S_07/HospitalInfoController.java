@@ -3,10 +3,7 @@ package com.spring.green2209S_07;
 import com.spring.green2209S_07.pagenation.PageProcess;
 import com.spring.green2209S_07.pagenation.PageVO;
 import com.spring.green2209S_07.service.HospitalInfoService;
-import com.spring.green2209S_07.vo.DetailInfoVO;
-import com.spring.green2209S_07.vo.HospitalInfoVO;
-import com.spring.green2209S_07.vo.MedicalSubjectInfoVO;
-import com.spring.green2209S_07.vo.TrafficInfoVO;
+import com.spring.green2209S_07.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -86,15 +84,7 @@ public class HospitalInfoController {
 
         model.addAttribute("hospitalInfoVOS", hospitalInfoVOS);
 
-        // 병원 진료 과목 정보 리스트
-
-//        ArrayList<ArrayList<MedicalSubjectInfoVO>> medicalSubjectInfoListVOS=new ArrayList<>();
-//
-//        for(int i=0; i<hospitalInfoVOS.size(); i++) {
-//            medicalSubjectInfoListVOS.add(hospitalInfoService.getMedicalSubjectInfoList(hospitalInfoVOS.get(i).getYkiho()));
-//        }
-//
-//        model.addAttribute("medicalSubjectInfoListVOS", medicalSubjectInfoListVOS);
+        // 병원 진료 과목 정보 리스트 가져오기
 
         ArrayList<MedicalSubjectInfoVO> medicalSubjectInfoVOS=new ArrayList<>();
         HashMap<String, ArrayList<MedicalSubjectInfoVO>> medicalSubjectInfoVOHashMap=new HashMap<>();
@@ -103,18 +93,9 @@ public class HospitalInfoController {
             medicalSubjectInfoVOHashMap.put(hospitalInfoVOS.get(i).getYkiho(), hospitalInfoService.getMedicalSubjectInfoList(hospitalInfoVOS.get(i).getYkiho()));
         }
 
-//        System.out.println("medicalSubjectInfoVOHashMap: "+medicalSubjectInfoVOHashMap);
         model.addAttribute("medicalSubjectInfoVOHashMap", medicalSubjectInfoVOHashMap);
 
-        // 병원 진료시간 정보 리스트
-
-//        ArrayList<ArrayList<DetailInfoVO>> detailInfoListVOS=new ArrayList<>();
-//
-//        for(int i=0; i<hospitalInfoVOS.size(); i++) {
-//            detailInfoListVOS.add(hospitalInfoService.getDetailInfoList(hospitalInfoVOS.get(i).getYkiho()));
-//        }
-//
-//        model.addAttribute("detailInfoListVOS", detailInfoListVOS);
+        // 병원 진료시간 정보 가져오기
 
         HashMap<String, DetailInfoVO> detailInfoVOHashMap=new HashMap<>();
 
@@ -122,7 +103,6 @@ public class HospitalInfoController {
             detailInfoVOHashMap.put(hospitalInfoVOS.get(i).getYkiho(), hospitalInfoService.getDetailInfo(hospitalInfoVOS.get(i).getYkiho()));
         }
 
-//        System.out.println("detailInfoVOHashMap: "+detailInfoVOHashMap);
         model.addAttribute("detailInfoVOHashMap", detailInfoVOHashMap);
 
         // 시도 리스트 가져오기
@@ -205,7 +185,7 @@ public class HospitalInfoController {
 
     // 콤보박스 시도 선택시 해당 시도에 해당하는 시군구 리스트 가져오기
     @ResponseBody
-    @RequestMapping(value = "getSgguList", method = RequestMethod.POST)
+    @RequestMapping(value = "/getSgguList", method = RequestMethod.POST)
     public ArrayList<HospitalInfoVO> getSgguListPost(Model model, String sidoCd) {
 
         return hospitalInfoService.getSgguList(sidoCd);
@@ -213,8 +193,8 @@ public class HospitalInfoController {
 
     // 병원 상세 정보 페이지 이동
 
-    @RequestMapping(value = "hospitalInfo", method = RequestMethod.GET)
-    public String hospitalInfoGet(Model model, String ykiho) {
+    @RequestMapping(value = "/hospitalInfo", method = RequestMethod.GET)
+    public String hospitalInfoGet(Model model, HttpSession session, String ykiho) {
 
         // 병원 기본 정보 가져오기
 
@@ -238,7 +218,42 @@ public class HospitalInfoController {
 
         System.out.println("trafficInfoVOS: "+trafficInfoVOS);
 
+        // 접속한 유저의 아이디 가지고 찜 여부 가져오기
+
+        String mid=(String)session.getAttribute("sMid");
+        WishlistVO wishlistVO=hospitalInfoService.getYkihoWishlist(hospitalInfoVO.getYkiho(), mid, hospitalInfoVO.getClCd());
+
+        model.addAttribute("wishlistVO", wishlistVO);
+
+
         return "hospitalInfo/hospitalInfo";
+    }
+
+    // 요양기관(병원 / 약국) 찜 목록 처리
+
+    @ResponseBody
+    @RequestMapping(value = "/ykihoWishlist", method = RequestMethod.POST)
+    public String ykihoWishlistPost(String ykiho, String mid, String clCd) {
+
+        System.out.println("ykiho: "+ykiho);
+        System.out.println("mid: "+mid);
+        System.out.println("clCd: "+clCd);
+
+        String res="0";
+
+        WishlistVO wishlistVO=hospitalInfoService.getYkihoWishlist(ykiho, mid, clCd);
+
+//        System.out.println("wishlistVO: "+wishlistVO);
+
+        if(wishlistVO==null) {
+            hospitalInfoService.setAddYkihoWishlist(ykiho, mid, clCd);
+            res="1";
+        }
+        else {
+            hospitalInfoService.setDropYkihoWishlist(ykiho, mid, clCd);
+        }
+
+        return res;
     }
 
 

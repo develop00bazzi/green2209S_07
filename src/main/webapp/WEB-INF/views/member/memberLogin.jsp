@@ -44,6 +44,19 @@
             }
         }
 
+        function kakaoLogin() {
+            $.ajax({
+                url: "${ctp}/kakao/kakaoAuthUrl",
+                type:"get",
+                success:function(requestUrl) {
+                    location.href=requestUrl;
+                },
+                error:function() {
+                    alert("전송 오류!");
+                }
+            });
+        }
+
     </script>
     <style>
         body{
@@ -110,7 +123,7 @@
 <%--                        <h4>소셜 로그인</h4>--%>
 <%--                    </li>--%>
                     <li class="mb-4">
-                        <a href="#"><img src="${ctp}/resources/images/kakao_login_large_narrow.png" width="100%" style="z-index: 990;"></a>
+                        <a href="javascript:kakaoLogin()"><img src="${ctp}/resources/images/kakao_login_large_narrow.png" width="100%" style="z-index: 990;"></a>
                     </li>
                     <li class="mb-4">
                         <a href="#"><img src="${ctp}/resources/images/btnG_완성형.png" width="100%" style="z-index: 990;"></a>

@@ -17,7 +17,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>title</title>
+    <title>${hospitalInfoVO.yadmNm} 상세 정보</title>
     <jsp:include page="/WEB-INF/views/include/cdn.jsp"></jsp:include>
     <link rel="stylesheet" href="${ctp}/resources/css/main.css">
     <link rel="stylesheet" href="${ctp}/resources/css/footer.css">
@@ -499,9 +499,97 @@
         .text-95 {
             font-size: .95em!important;
         }
+
+    /*   리뷰 작성 모달 관련 css */
+
+        .modal-body {
+            background:#eee;
+        }
+        .modal-body .gradient-brand-color {
+            background-image: -webkit-linear-gradient(0deg, #376be6 0%, #6470ef 100%);
+            background-image: -ms-linear-gradient(0deg, #376be6 0%, #6470ef 100%);
+            color: #fff;
+        }
+        .modal-body .contact-info__wrapper {
+            overflow: hidden;
+            border-radius: .625rem .625rem 0 0
+        }
+
+        @media (min-width: 1024px) {
+            .modal-body .contact-info__wrapper {
+                border-radius: 0 .625rem .625rem 0;
+                padding: 5rem !important
+            }
+        }
+        .modal-body .contact-info__list span.position-absolute {
+            left: 0
+        }
+        .modal-body .z-index-101 {
+            z-index: 101;
+        }
+        .modal-body .list-style--none {
+            list-style: none;
+        }
+        .modal-body .modal-body .contact__wrapper {
+            background-color: #fff;
+            border-radius: 0 0 .625rem .625rem
+        }
+
+        @media (min-width: 1024px) {
+            .modal-body .contact__wrapper {
+                border-radius: .625rem 0 .625rem .625rem
+            }
+        }
+        @media (min-width: 1024px) {
+            .modal-body .contact-form__wrapper {
+                padding: 5rem !important
+            }
+        }
+        .modal-body .shadow-lg, .shadow-lg--on-hover:hover {
+            box-shadow: 0 1rem 3rem rgba(132,138,163,0.1) !important;
+        }
     </style>
     <script>
         'use strict';
+
+        // 찜 목록 추가
+
+        function wishlistClick() {
+
+            let mid="${sMid}";
+            let ykiho="${hospitalInfoVO.ykiho}";
+            let clCd="${hospitalInfoVO.clCd}";
+
+            if(mid=="") {
+                alert("찜 목록 추가는 회원만 사용할 수 있습니다.");
+                return false;
+            }
+            else {
+                $.ajax({
+                    type: "post",
+                    url:"${ctp}/hospitalInfo/ykihoWishlist",
+                    data: {
+                        ykiho: ykiho,
+                        mid: mid,
+                        clCd: clCd
+                    },
+                    success:function(res) {
+                        if(res=="1") {
+                            alert("찜 목록에 추가되었습니다!");
+                        }
+                        else {
+                            alert("찜 목록에서 제거되었습니다!");
+                        }
+                        location.reload();
+                    },
+                    error:function() {
+                        alert("전송 오류!");
+                    }
+                });
+            }
+
+        }
+
     </script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d9f2a0e2e19ba0f1e69f3d21528563d0"></script>
 </head>
@@ -517,13 +605,36 @@
                         <img src="${ctp}/resources/images/hospitalInfo/hospitalInfoNoImg.png" title="" alt="">
                     </div>
                     <div class="article-title">
+                        <h3 class="float-right mt-1">
+                            <span type="button" class="badge badge-secondary" data-toggle="modal" data-target="#addPhotoModal">
+                                <i class="fa fa-file-image-o mr-2" aria-hidden="true"></i>사진 추가하기
+                            </span>
+                        </h3>
+                        <h2 class="float-right mt-1 mr-2">
+                            <a href="javascript:wishlistClick()">
+                                <c:if test="${empty wishlistVO}">
+                                    <i class="fa fa-star-o" id="wishlist" aria-hidden="true" style="color: gray;"></i>
+                                </c:if>
+                                <c:if test="${!empty wishlistVO}">
+                                    <i class="fa fa-star" aria-hidden="true" style="color: red;"></i>
+                                </c:if>
+                            </a>
+                        </h2>
                         <h6><a href="#">${hospitalInfoVO.sidoCdNm} > ${hospitalInfoVO.sgguCdNm}<c:if test="${hospitalInfoVO.emdongNm!=''}"> > ${hospitalInfoVO.emdongNm}</c:if></a></h6>
                         <h2>${hospitalInfoVO.yadmNm}</h2>
                         <div class="media pt-0">
                             <div class="media-body">
                                 <label><i class="fa fa-location-arrow mr-2" aria-hidden="true"></i>${hospitalInfoVO.addr}</label>
                                 <br/>
-                                <label><i class="fa fa-phone mr-2" aria-hidden="true"></i>${hospitalInfoVO.telno}</label>
+                                <label>
+                                    <i class="fa fa-phone mr-1" aria-hidden="true"></i>
+                                    <c:if test="${hospitalInfoVO.telno==''}">
+                                        정보 없음
+                                    </c:if>
+                                    <c:if test="${hospitalInfoVO.telno!=''}">
+                                        <a href="tel:${hospitalInfoVO.telno}">${hospitalInfoVO.telno}</a>
+                                    </c:if>
+                                </label>
                                 <br/>
                                 <label><i class="fa fa-calendar-check-o mr-2" aria-hidden="true"></i>개설일자 : ${fn:substring(hospitalInfoVO.estbDd,0,4)}년 ${fn:substring(hospitalInfoVO.estbDd,4,6)}월 ${fn:substring(hospitalInfoVO.estbDd,6,8)}일</label>
                                 <c:if test="${hospitalInfoVO.hospUrl!=''}">
@@ -545,39 +656,45 @@
                         <div id="map" style="width: 100%; height: 60vh;"></div>
                     </div>
                 </article>
-                <div class="contact-form article-comment">
-                    <h4>Leave a Reply</h4>
-                    <form id="contact-form" method="POST">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input name="Name" id="name" placeholder="Name *" class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input name="Email" id="email" placeholder="Email *" class="form-control" type="email">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea name="message" id="message" placeholder="Your message *" rows="4" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="send">
-                                    <button class="px-btn theme"><span>Submit</span> <i class="arrow"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<%--                <div class="contact-form article-comment">--%>
+<%--                    <h4>Leave a Reply</h4>--%>
+<%--                    <form id="contact-form" method="POST">--%>
+<%--                        <div class="row">--%>
+<%--                            <div class="col-md-6">--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <input name="Name" id="name" placeholder="Name *" class="form-control" type="text">--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-md-6">--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <input name="Email" id="email" placeholder="Email *" class="form-control" type="email">--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-md-12">--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <textarea name="message" id="message" placeholder="Your message *" rows="4" class="form-control"></textarea>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-md-12">--%>
+<%--                                <div class="send">--%>
+<%--                                    <button class="px-btn theme"><span>Submit</span> <i class="arrow"></i></button>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </form>--%>
+<%--                </div>--%>
             </div>
             <div class="col-lg-4 m-15px-tb blog-aside">
                 <!-- Latest Post -->
                 <div class="widget widget-latest-post">
                     <div class="widget-title">
-                        <h3><i class="fa fa-pencil-square-o mr-2" aria-hidden="true"></i>진료 후기</h3>
+                        <h3>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            진료 후기
+                            <span type="button" class="badge badge-success float-right mt-0" data-toggle="modal" data-target="#reviewModal">
+                                후기 작성
+                            </span>
+                        </h3>
                     </div>
                     <div class="widget-body">
                         <div class="latest-post-aside media">
@@ -898,6 +1015,53 @@
                     </div>
                 </div>
                 <!-- End Author -->
+                <!-- widget Tags -->
+                <c:if test="${detailInfoVO.emyDayYn!='' && detailInfoVO.emyNgtYn!='' && !empty detailInfoVO}">
+                    <div class="widget widget-tags">
+                        <div class="widget-title">
+                            <h3>
+                                <i class="fa fa-ambulance mr-2" aria-hidden="true"></i>응급실 운영 정보
+                            </h3>
+                        </div>
+                        <div class="widget-body">
+                            <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">
+                            <div class="text-default-d3 text-90 text-600">
+                                주간 응급실 연락처
+                            </div>
+                                <div class="ml-auto text-dark-l2">
+<%--                                    <p>--%>
+<%--                                        <c:choose>--%>
+<%--                                            <c:when test="${empty detailInfoVO}">--%>
+<%--                                                정보 없음 [전화 문의]--%>
+<%--                                            </c:when>--%>
+<%--                                            <c:when test="${detailInfoVO.emyDayYn==''}">--%>
+<%--                                                정보 없음 [전화 문의]--%>
+<%--                                            </c:when>--%>
+<%--                                            <c:otherwise>--%>
+<%--                                                <c:if test="${detailInfoVO.emyDayYn=='Y'}">--%>
+<%--                                                    운영--%>
+<%--                                                </c:if>--%>
+<%--                                                <c:if test="${detailInfoVO.emyNgtYn=='N'}">--%>
+<%--                                                    미운영--%>
+<%--                                                </c:if>--%>
+<%--                                            </c:otherwise>--%>
+<%--                                        </c:choose>--%>
+<%--                                    </p>--%>
+                                    ${detailInfoVO.emyDayTelNo1}<br/>${detailInfoVO.emyDayTelNo2}
+                                </div>
+                            </div>
+                            <div role="button" class="d-flex flex-wrap align-items-center my-2 bgc-secondary-l4 bgc-h-secondary-l3 radius-1 p-25 d-style">
+                                <div class="text-default-d3 text-90 text-600">
+                                    야간 응급실 연락처
+                                </div>
+                                <div class="ml-auto text-dark-l2">
+                                    ${detailInfoVO.emyNgtTelNo1}<br/>${detailInfoVO.emyNgtTelNo2}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+                <!-- End widget Tags -->
                 <!-- Trending Post -->
                 <div class="widget widget-post">
                     <div class="widget-title">
@@ -967,24 +1131,146 @@
                     </div>
                 </div>
                 <!-- End Trending Post -->
-                <!-- widget Tags -->
-                <div class="widget widget-tags">
-                    <div class="widget-title">
-                        <h3>
-                            <i class="fa fa-bus mr-2" aria-hidden="true"></i>로렘 입슘
-                        </h3>
-                    </div>
-                    <div class="widget-body">
-
-                    </div>
-                </div>
-                <!-- End widget Tags -->
             </div>
         </div>
     </div>
 </div>
 
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+
+<%-- 병원 리뷰 작성 모달 --%>
+
+<div class="modal fade" id="reviewModal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fa fa-pencil mr-2" aria-hidden="true"></i>${hospitalInfoVO.yadmNm} 진료 후기 작성</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="contact__wrapper shadow-lg mt-n9">
+                        <div class="row no-gutters">
+                            <div class="col-lg-5 contact-info__wrapper gradient-brand-color p-5 order-lg-2">
+                                <h3 class="color--white mb-5">진료 후기 작성 주의사항</h3>
+
+                                <ul class="contact-info__list list-style--none position-relative z-index-101">
+                                    <li class="mb-4 pl-4">
+                                        <span class="position-absolute">
+                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        </span>
+                                        이상한 정보는 금물!
+                                    </li>
+                                    <li class="mb-4 pl-4">
+                                        <span class="position-absolute">
+                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                        </span>
+                                        아파! 어디가? 의 검수 진행 후<br/>
+                                        사이트에 노출되므로 정확한 정보만<br/>
+                                        작성해주시기 바랍니다!
+                                    </li>
+<%--                                    <li class="mb-4 pl-4">--%>
+<%--                                        <span class="position-absolute">--%>
+<%--                                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>--%>
+<%--                                        </span>--%>
+<%--                                    </li>--%>
+                                </ul>
+
+                            </div>
+
+                            <div class="col-lg-7 contact-form__wrapper p-5 order-lg-1">
+                                <form action="#" class="contact-form form-validate" novalidate="novalidate">
+                                    <div class="row">
+                                        <div class="col-sm-12 mb-3">
+                                            <div class="form-group">
+                                                <label class="required-field" for="firstName">First Name</label>
+                                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Wendy">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 mb-3">
+                                            <div class="form-group">
+                                                <label for="lastName">Last Name</label>
+                                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Appleseed">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 mb-3">
+                                            <div class="form-group">
+                                                <label class="required-field" for="email">Email</label>
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="wendy.apple@seed.com">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 mb-3">
+                                            <div class="form-group">
+                                                <label for="phone">Phone Number</label>
+                                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="(021)-454-545">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 mb-3">
+                                            <div class="form-group">
+                                                <label class="required-field" for="review">How can we help?</label>
+                                                <textarea class="form-control" id="review" name="review" rows="4"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12 mb-3">
+                                            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- End Contact Form Wrapper -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%-- 사진 추가하기 모달 창 --%>
+
+<!-- The Modal -->
+<div class="modal fade" id="addPhotoModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">${hospitalInfoVO.yadmNm} 사진 추가하기</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                사진 추가 으어어어어어어어
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 <script src="${ctp}/resources/js/hospitalInfoKakaoMap.js"></script>
 <script>
 

@@ -15,4 +15,6 @@ public interface MemberService {
     public void memberJoinOkEmailSend(MemberVO vo, String bannerImg);
 
     public void setMemberAuthStatusUpdate(MemberVO vo);
+
+
 }

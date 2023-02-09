@@ -1,10 +1,7 @@
 package com.spring.green2209S_07.service;
 
 import com.spring.green2209S_07.dao.HospitalInfoDAO;
-import com.spring.green2209S_07.vo.DetailInfoVO;
-import com.spring.green2209S_07.vo.HospitalInfoVO;
-import com.spring.green2209S_07.vo.MedicalSubjectInfoVO;
-import com.spring.green2209S_07.vo.TrafficInfoVO;
+import com.spring.green2209S_07.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,6 +67,21 @@ public class HospitalInfoServiceImpl implements HospitalInfoService {
     @Override
     public ArrayList<TrafficInfoVO> getTrafficInfo(String ykiho) {
         return hospitalInfoDAO.getTrafficInfo(ykiho);
+    }
+
+    @Override
+    public WishlistVO getYkihoWishlist(String ykiho, String mid, String clCd) {
+        return hospitalInfoDAO.getYkihoWishlist(ykiho, mid, clCd);
+    }
+
+    @Override
+    public void setAddYkihoWishlist(String ykiho, String mid, String clCd) {
+        hospitalInfoDAO.setAddYkihoWishlist(ykiho, mid, clCd);
+    }
+
+    @Override
+    public void setDropYkihoWishlist(String ykiho, String mid, String clCd) {
+        hospitalInfoDAO.setDropYkihoWishlist(ykiho, mid, clCd);
     }
 
 

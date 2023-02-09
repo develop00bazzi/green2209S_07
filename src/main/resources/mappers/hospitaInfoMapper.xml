@@ -5,21 +5,19 @@
     <!-- 병원 리스트 관련 처리 -->
 
     <select id="getTotRecCnt" resultType="int">
-        select count(*) from hospitalinfo_s where ykiho in (select ykiho from medicalsubjectinfo_s where dgsbjtCd=#{medicalSubjectCode}) and ykiho in (select ykiho from hospitalinfo_s where
+        select count(*) from hospitalinfo_s where ykiho in <if test="medicalSubjectCode!='99'">(select ykiho from medicalsubjectinfo_s where dgsbjtCd=#{medicalSubjectCode})</if><if
+            test="medicalSubjectCode=='99'">(select ykiho from medicalsubjectinfo_s where dgsbjtCd in (80,81,82,83,84,85,86,87,88) group by ykiho)</if> and ykiho in (select ykiho from hospitalinfo_s where
         <if test="regionFlag=='sido'">sidoCd</if><if test="regionFlag=='sggu'">sgguCd</if>=#{regionCode})
         <if test="yadmNm!=''">and ykiho in (select ykiho from hospitalInfo_s where yadmNm like concat('%', #{yadmNm}, '%'))</if>;
     </select>
 
     <select id="getHospitalInfoList" resultType="com.spring.green2209S_07.vo.HospitalInfoVO">
-        select * from hospitalinfo_s where ykiho in (select ykiho from medicalsubjectinfo_s where dgsbjtCd=#{medicalSubjectCode}) and ykiho in (select ykiho from hospitalinfo_s where
+        select * from hospitalinfo_s where ykiho in <if test="medicalSubjectCode!='99'">(select ykiho from medicalsubjectinfo_s where dgsbjtCd=#{medicalSubjectCode})</if><if
+            test="medicalSubjectCode=='99'">(select ykiho from medicalsubjectinfo_s where dgsbjtCd in (80,81,82,83,84,85,86,87,88) group by ykiho)</if> and ykiho in (select ykiho from hospitalinfo_s where
         <if test="regionFlag=='sido'">sidoCd</if><if test="regionFlag=='sggu'">sgguCd</if>=#{regionCode})
         <if test="yadmNm!=''">and ykiho in (select ykiho from hospitalInfo_s where yadmNm like concat('%', #{yadmNm}, '%'))</if> order by yadmNm desc limit #{startIndexNo}, #{pageSize};
     </select>
-
-<!--    <select id="getHospitalInfoList" resultType="com.spring.green2209S_07.vo.HospitalInfoVO">-->
-<!--        select * from hospitalInfo_s where sgguCdNm='청주서원구' limit 0,10;-->
-<!--    </select>-->
-
+    
     <select id="getMedicalSubjectInfoList" resultType="com.spring.green2209S_07.vo.MedicalSubjectInfoVO">
         select * from medicalSubjectInfo_s where ykiho=#{ykiho};
     </select>
@@ -49,5 +47,19 @@
     <select id="getTrafficInfo" resultType="com.spring.green2209S_07.vo.TrafficInfoVO">
         select * from trafficInfo_s where ykiho=#{ykiho};
     </select>
+
+<!-- 병원 찜 목록 관련 처리 -->
+
+    <select id="getYkihoWishlist" resultType="com.spring.green2209S_07.vo.WishlistVO">
+        select * from ykihoWishlist_s where ykiho=#{ykiho} and mid=#{mid} and clCd=#{clCd};
+    </select>
+
+    <insert id="setAddYkihoWishlist">
+        insert into ykihoWishlist_s values (default, #{ykiho}, #{mid}, #{clCd});
+    </insert>
+
+    <delete id="setDropYkihoWishlist">
+        delete from ykihoWishlist_s where ykiho=#{ykiho} and mid=#{mid} and clCd=#{clCd};
+    </delete>
 
 </mapper>

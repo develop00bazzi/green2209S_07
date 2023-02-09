@@ -1,9 +1,6 @@
 package com.spring.green2209S_07.dao;
 
-import com.spring.green2209S_07.vo.DetailInfoVO;
-import com.spring.green2209S_07.vo.HospitalInfoVO;
-import com.spring.green2209S_07.vo.MedicalSubjectInfoVO;
-import com.spring.green2209S_07.vo.TrafficInfoVO;
+import com.spring.green2209S_07.vo.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -28,5 +25,11 @@ public interface HospitalInfoDAO {
 
     public DetailInfoVO getDetailInfo(@Param("ykiho") String ykiho);
 
-    ArrayList<TrafficInfoVO> getTrafficInfo(@Param("ykiho") String ykiho);
+    public ArrayList<TrafficInfoVO> getTrafficInfo(@Param("ykiho") String ykiho);
+
+    public WishlistVO getYkihoWishlist(@Param("ykiho") String ykiho, @Param("mid") String mid, @Param("clCd") String clCd);
+
+    public void setAddYkihoWishlist(@Param("ykiho") String ykiho, @Param("mid") String mid, @Param("clCd") String clCd);
+
+    public void setDropYkihoWishlist(@Param("ykiho") String ykiho, @Param("mid") String mid, @Param("clCd") String clCd);
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.spring.green2209S_07.dao.MemberDAO">
 
     <insert id="setMemberJoinOk">
-        insert into member_s values (default, #{vo.mid}, #{vo.pwd}, #{vo.nickName}, #{vo.name}, #{vo.phoneNum}, #{vo.email}, #{vo.address}, default, default, default, default);
+        insert into member_s values (default, #{vo.mid}, #{vo.pwd}, #{vo.nickName}, #{vo.name}, #{vo.phoneNum}, #{vo.email}, #{vo.address}, default, #{vo.authStatus}, default, default, #{vo.joinKey});
     </insert>
     
     <select id="getMemberInfoMid" resultType="com.spring.green2209S_07.vo.MemberVO">
@@ -17,7 +17,7 @@
     <select id="getMemberInfoEmail" resultType="com.spring.green2209S_07.vo.MemberVO">
         select * from member_s where email=#{email};
     </select>
-    
+
     <update id="setEmailAuthKey">
         update member_s set authKey=#{authKey} where mid=#{vo.mid} and name=#{vo.name} and nickName=#{vo.nickName};
     </update>
